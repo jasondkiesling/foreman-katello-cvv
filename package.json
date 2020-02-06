@@ -1,7 +1,31 @@
 {
   "name": "foreman-katello-cvv",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "license": "GPL-3.0-only",
+  "contributors": [
+    {
+      "name": "Jason Kiesling",
+      "email": "jason_kiesling@student.uml.edu",
+      "url": "https://jasondkiesling.com/"
+    },
+    {
+      "name": "Kevin Huang",
+      "email": "kevin_huang2@student.uml.edu"
+    },
+    {
+      "name": "Evan O'Malley",
+      "email": "evan_omalley@student.uml.edu"
+    },
+    {
+      "name": "Max Rider",
+      "email": "maxwell_rider@student.uml.edu"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jasondkiesling/foreman-katello-cvv.git/"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
