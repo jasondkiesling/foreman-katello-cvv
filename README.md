@@ -16,7 +16,6 @@ Ian Ballou - Red Hat
 1. Install Node.js (a JavaScript Runtime) via NVM. Follow the direction from the [NVM website](https://github.com/nvm-sh/nvm) to install it on your OS.
 1. Run `nvm install --lts` to install Node.
 1. Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
-1. Install [Yarn](https://yarnpkg.com/lang/en/docs/install/).
 1. Install [VSCode](https://code.visualstudio.com/).
 1. Add the following extensions to VSCode.
     * NPM Intellisense
