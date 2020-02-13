@@ -21,6 +21,7 @@ Ian Ballou - Red Hat
     * NPM Intellisense
     * GitLens
     * ESLint
+    * Prettier
 1. Install React Dev Tools in Google Chrome.
 1. Visit [github.com/jasondkiesling/foreman-katello-cvv](https://github.com/jasondkiesling/foreman-katello-cvv). In the top right corner, click "Fork" and follow the directions.
 1. On your computer, run the following commands. (This requires git to be installed.) (If using SSH keys, replace the HTTPS URL with your SSH URL.)
