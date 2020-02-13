@@ -27,7 +27,7 @@ Ian Ballou - Red Hat
 1. On your computer, run the following commands. (This requires git to be installed.)
     ```
     git clone https://github.com/[your-username]/foreman-katello-cvv.git  
-    cd MYR  
+    cd foreman-katello-cvv
     git remote add upstream https://github.com/jasondkiesling/foreman-katello-cvv.git
     ```
 1. Run `npm install` to download required packages.
