@@ -17,4 +17,5 @@ header > .header-logo {
 header > .text {
   height: calc(var(--header-height) * 0.5);
   margin: calc(var(--header-height) * 0.25);
+  margin-left: 0;
 }
