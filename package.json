@@ -27,6 +27,8 @@
     "url": "https://github.com/jasondkiesling/foreman-katello-cvv.git/"
   },
   "dependencies": {
+    "@patternfly/react-core": "^3.134.2",
+    "@patternfly/react-icons": "^3.14.43",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
