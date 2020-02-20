@@ -1,6 +1,7 @@
 import React from "react";
 
-import Header from "../Header.js";
+import Header from "../Header";
+import LoginForm from "./LoginForm";
 
 import "./Login.css";
 
@@ -8,7 +9,7 @@ export default function Login() {
   return (
     <div>
       <Header />
-      <p>Login Page</p>
+      <LoginForm />
     </div>
   );
 }
