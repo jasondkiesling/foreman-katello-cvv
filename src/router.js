@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import App from "./App.js";
-import Login from "./Login.js";
+import App from "./App";
+import Login from "./Login";
 
 const router = () => (
   <BrowserRouter>

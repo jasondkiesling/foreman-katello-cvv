@@ -44,6 +44,6 @@
     "react/jsx-key": "off",
     "linebreak-style": "off",
     "react/jsx-filename-extension": "off",
-    "import/extensions": ["warn", "always"]
+    "import/extensions": ["warn", "never"]
   }
 }
