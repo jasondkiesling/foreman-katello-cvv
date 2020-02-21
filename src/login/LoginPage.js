@@ -1,14 +1,14 @@
 import React from "react";
 
 import Header from "../Header";
-import SimpleForm from "./TestLogin";
+import LoginForm from "./LoginForm";
 import "./Login.css";
 
 export default function LoginPage() {
   return (
     <div>
       <Header />
-      <SimpleForm />
+      <LoginForm />
     </div>
   );
 }

@@ -8,7 +8,7 @@ import {
   Button
 } from "@patternfly/react-core";
 
-export default function SimpleForm() {
+export default function LoginForm() {
   const [state, setState] = React.useState({
     serverName: "",
     isRememberMeChecked: false,
