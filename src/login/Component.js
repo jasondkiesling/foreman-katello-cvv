@@ -1,13 +1,11 @@
 import React from "react";
 
-require("dotenv").config();
-
 export default function MyComponent({ name, occupation = "unemployed", gender }) {
   const [basicAuth, setBasicAuth] = React.useState("");
 
   React.useEffect(() => {
-    const username = "";
-    const password = "";
+    const username = "admin";
+    const password = "windyring86";
     setBasicAuth(window.btoa(`${username}:${password}`));
   }, []);
 
