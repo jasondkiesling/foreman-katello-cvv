@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import "./index.css";
-import router from "./router.js";
-import * as serviceWorker from "./serviceWorker.js";
+import router from "./router";
+import * as serviceWorker from "./serviceWorker";
 
 const routes = router();
 
