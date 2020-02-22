@@ -53,6 +53,7 @@ export default function LoginForm() {
       .then((response) => response.json())
       .then((jsonResponse) => {
         console.log(jsonResponse);
+        alert(`Server says there are ${jsonResponse.total} Content Views.\nThe full response is in the console.`);
       })
       .catch((e) => console.error(e));
   };
