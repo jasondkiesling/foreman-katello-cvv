@@ -36,11 +36,6 @@ header > img.header-logo {
   background-color: white;
 }
 
-.pf-c-form__helper-text .pf-m-error .pf-m-hidden {
-  display: none;
-  background-color: pink !important;
-}
-
 .pf-c-form-control {
   border: 1px solid slategrey;
   width: 35%;
