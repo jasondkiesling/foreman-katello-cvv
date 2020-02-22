@@ -27,29 +27,49 @@ header > img.header-logo {
 }
 
 .login-form {
+  --input-width: 80%;
   display: flex;
   flex-direction: column;
   text-align: center;
   margin-left: 30%;
   margin-right: 30%;
-  /* margin-top: 10em; */
   background-color: white;
+  border-radius: 1em;
+  padding-bottom: 1em;
 }
 
-.pf-c-form-control {
-  border: 1px solid slategrey;
-  width: 35%;
+form.login-form > span.pf-c-label {
+  text-align: left;
+  padding-left: calc((100% - var(--input-width)) / 2);
+  margin-bottom: 0.25em;
+}
+
+form.login-form > input.pf-c-form-control {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  width: var(--input-width);
   padding: auto;
   margin: auto;
   background-color: white;
+  margin-bottom: 1em;
+  border-radius: 0.25em;
 }
 
-.remember_box {
+form.login-form > .remember_box {
   display: flex;
   flex-direction: row;
   margin: auto;
 }
 
-.pf-c-check {
+form.login-form .pf-c-check {
   margin-top: 8px;
+}
+
+form.login-form > button#submit {
+  padding: 0.5em;
+  margin: 0.5em;
+  width: calc((100% - var(--input-width)) * 2);
+  background-color: lightgrey;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0.5em;
 }
