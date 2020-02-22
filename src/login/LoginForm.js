@@ -44,8 +44,6 @@ export default function LoginForm() {
 
   const onSubmitClick = (e) => {
     e.preventDefault();
-    console.log(basicAuth);
-    console.log(state);
     fetch(`https://${state.serverName}/katello/api/content_views`, {
       method: "GET",
       headers: {
