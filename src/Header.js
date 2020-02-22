@@ -4,7 +4,7 @@ import "./Header.css";
 
 export default function Header() {
   return (
-    <header>
+    <header className="page-header">
       <img
         src="/foreman_helmet.svg"
         alt="Helmet"
