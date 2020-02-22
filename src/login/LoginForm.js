@@ -8,6 +8,8 @@ import {
   Button
 } from "@patternfly/react-core";
 
+import "./Login.css";
+
 export default function LoginForm() {
   const [state, setState] = React.useState({
     serverName: "",
@@ -59,42 +61,46 @@ export default function LoginForm() {
   };
 
   return (
-    <form>
-      <Label>Server Address:</Label>
-      <TextInput
-        id="server_address"
-        type="text"
-        value={state.serverName}
-        onChange={handleServerNameChange}
-      />
-      <Label>Username:</Label>
-      <TextInput
-        id="username"
-        type="text"
-        value={state.usernameValue}
-        onChange={handleUsernameChange}
-      />
-      <Label>Password:</Label>
-      <TextInput
-        id="password"
-        type="password"
-        value={state.passwordValue}
-        onChange={handlePasswordChange}
-      />
-      <Label>Remember Me?</Label>
-      <Checkbox
-        id="remember_me"
-        value={state.isRememberMeChecked}
-        onClick={onRememberMeClick}
-      />
-      <Button
-        id="submit"
-        // type="submit"
-        variant="danger"
-        onClick={onSubmitClick}
-      >
-        Submit!
-      </Button>
-    </form>
+    <div className="login-area">
+      <form className="login-form">
+        <Label>Server Address:</Label>
+        <TextInput
+          id="server_address"
+          type="text"
+          value={state.serverName}
+          onChange={handleServerNameChange}
+        />
+        <Label>Username:</Label>
+        <TextInput
+          id="username"
+          type="text"
+          value={state.usernameValue}
+          onChange={handleUsernameChange}
+        />
+        <Label>Password:</Label>
+        <TextInput
+          id="password"
+          type="password"
+          value={state.passwordValue}
+          onChange={handlePasswordChange}
+        />
+        <div className="remember_box">
+          <Label>Remember Me?</Label>
+          <Checkbox
+            id="remember_me"
+            value={state.isRememberMeChecked}
+            onClick={onRememberMeClick}
+          />
+        </div>
+        <Button
+          id="submit"
+          // type="submit"
+          variant="danger"
+          onClick={onSubmitClick}
+        >
+          Submit!
+        </Button>
+      </form>
+    </div>
   );
 }
