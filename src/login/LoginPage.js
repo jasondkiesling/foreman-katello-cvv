@@ -1,12 +1,13 @@
 import React from "react";
 
-// import Header from "../Header";
+import LoginHeader from "./LoginHeader";
 import LoginForm from "./LoginForm";
 import "./Login.css";
 
 export default function LoginPage() {
   return (
-    <div>
+    <div id="login-page">
+      <LoginHeader />
       <LoginForm />
     </div>
   );
