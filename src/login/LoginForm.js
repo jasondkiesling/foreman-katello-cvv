@@ -61,6 +61,7 @@ export default function LoginForm() {
 
   return (
     <form className="login-form">
+      <h4>Log in to your account</h4>
       <Label>Server Address:</Label>
       <TextInput
         id="server_address"
