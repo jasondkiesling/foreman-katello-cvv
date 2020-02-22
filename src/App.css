@@ -1,3 +1,7 @@
+:root {
+  --foreman-blue: #025d8c;
+}
+
 .App {
   text-align: center;
 }
