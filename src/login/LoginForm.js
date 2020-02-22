@@ -94,7 +94,6 @@ export default function LoginForm() {
       <Button
         id="submit"
         // type="submit"
-        variant="danger"
         onClick={onSubmitClick}
       >
         Submit!
