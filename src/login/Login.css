@@ -1,8 +1,44 @@
+.login-area {
+  background: rgb(0, 212, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 212, 255, 1) 0%,
+    rgba(2, 93, 140, 1) 35%,
+    rgba(2, 0, 36, 1) 100%
+  );
+  height: 100vh;
+  top: 0;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-left: 30%;
+  margin-right: 30%;
+  /* margin-top: 10em; */
+  background-color: white;
+}
+
 .pf-c-form__helper-text .pf-m-error .pf-m-hidden {
   display: none;
   background-color: pink !important;
 }
 
 .pf-c-form-control {
-  border: 1px solid red;
+  border: 1px solid slategrey;
+  width: 35%;
+  padding: auto;
+  margin: auto;
+  background-color: white;
+}
+
+.remember_box {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
+.pf-c-check {
+  margin-top: 8px;
 }
