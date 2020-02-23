@@ -1,11 +1,10 @@
 import React, { isValidElement } from "react";
 
 import {
-  LoginPage,
   TextInput,
   Label,
   Checkbox,
-  Button
+  Button,
 } from "@patternfly/react-core";
 
 import "./Login.css";
@@ -18,7 +17,7 @@ export default function LoginForm() {
     isValidUsername: false,
     passwordValue: "",
     isValidPassword: false,
-    showHelperText: false
+    showHelperText: false,
   });
 
   const [basicAuth, setBasicAuth] = React.useState("");
@@ -31,19 +30,19 @@ export default function LoginForm() {
     setState({ ...state, isRememberMeChecked: !state.isRememberMeChecked });
   };
 
-  const handleUsernameChange = val => {
+  const handleUsernameChange = (val) => {
     setState({ ...state, usernameValue: val });
   };
 
-  const handlePasswordChange = val => {
+  const handlePasswordChange = (val) => {
     setState({ ...state, passwordValue: val });
   };
 
-  const handleServerNameChange = val => {
+  const handleServerNameChange = (val) => {
     setState({ ...state, serverName: val });
   };
 
-  const onSubmitClick = e => {
+  const onSubmitClick = (e) => {
     e.preventDefault();
     console.log(basicAuth);
     console.log(state);
@@ -53,8 +52,8 @@ export default function LoginForm() {
         Authorization: `Basic ${basicAuth}`
       }
     })
-      .then(response => response.json())
-      .then(jsonResponse => {
+      .then((response) => response.json())
+      .then((jsonResponse) => {
         console.log(jsonResponse);
       })
       .catch(e => console.error(e));
