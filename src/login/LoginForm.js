@@ -1,4 +1,4 @@
-import React, { isValidElement } from "react";
+import React from "react";
 
 import {
   TextInput,
@@ -44,62 +44,59 @@ export default function LoginForm() {
 
   const onSubmitClick = (e) => {
     e.preventDefault();
-    console.log(basicAuth);
-    console.log(state);
     fetch(`https://${state.serverName}/katello/api/content_views`, {
       method: "GET",
       headers: {
-        Authorization: `Basic ${basicAuth}`
-      }
+        Authorization: `Basic ${basicAuth}`,
+      },
     })
       .then((response) => response.json())
       .then((jsonResponse) => {
         console.log(jsonResponse);
+        alert(`Server says there are ${jsonResponse.total} Content Views.\nThe full response is in the console.`);
       })
-      .catch(e => console.error(e));
+      .catch((e) => console.error(e));
   };
 
   return (
-    <div className="login-area">
-      <form className="login-form">
-        <Label>Server Address:</Label>
-        <TextInput
-          id="server_address"
-          type="text"
-          value={state.serverName}
-          onChange={handleServerNameChange}
+    <form className="login-form">
+      <h4>Log in to your account</h4>
+      <Label>Server Address:</Label>
+      <TextInput
+        id="server_address"
+        type="text"
+        value={state.serverName}
+        onChange={handleServerNameChange}
+      />
+      <Label>Username:</Label>
+      <TextInput
+        id="username"
+        type="text"
+        value={state.usernameValue}
+        onChange={handleUsernameChange}
+      />
+      <Label>Password:</Label>
+      <TextInput
+        id="password"
+        type="password"
+        value={state.passwordValue}
+        onChange={handlePasswordChange}
+      />
+      <div className="remember_box">
+        <Label>Remember Me?</Label>
+        <Checkbox
+          id="remember_me"
+          value={state.isRememberMeChecked}
+          onClick={onRememberMeClick}
         />
-        <Label>Username:</Label>
-        <TextInput
-          id="username"
-          type="text"
-          value={state.usernameValue}
-          onChange={handleUsernameChange}
-        />
-        <Label>Password:</Label>
-        <TextInput
-          id="password"
-          type="password"
-          value={state.passwordValue}
-          onChange={handlePasswordChange}
-        />
-        <div className="remember_box">
-          <Label>Remember Me?</Label>
-          <Checkbox
-            id="remember_me"
-            value={state.isRememberMeChecked}
-            onClick={onRememberMeClick}
-          />
-        </div>
-        <Button
-          id="submit"
-          // type="submit"
-          variant="danger"
-          onClick={onSubmitClick}
-        >
-          Submit!
-        </Button>
-      </form>
-    </div>
+      </div>
+      <Button
+        id="submit"
+        // type="submit"
+        onClick={onSubmitClick}
+      >
+        Submit!
+      </Button>
+    </form>
   );
 }
