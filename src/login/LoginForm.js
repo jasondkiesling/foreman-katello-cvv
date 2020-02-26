@@ -42,8 +42,8 @@ export default function LoginForm() {
     setState({ ...state, serverName: val });
   };
 
-  const onSubmitClick = (e) => {
-    e.preventDefault();
+  const onSubmitClick = (event) => {
+    event.preventDefault();
     fetch(`https://${state.serverName}/katello/api/content_views`, {
       method: "GET",
       headers: {
@@ -55,7 +55,7 @@ export default function LoginForm() {
         console.log(jsonResponse);
         alert(`Server says there are ${jsonResponse.total} Content Views.\nThe full response is in the console.`);
       })
-      .catch((e) => console.error(e));
+      .catch((err) => console.error(err));
   };
 
   return (
