@@ -3,7 +3,7 @@ import Header from "./Header";
 // import logo from "./logo.svg";
 import "./App.css";
 
-function App() {
+export default function ContentViews() {
   return (
     <div className="App">
       <Header />
@@ -24,5 +24,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
