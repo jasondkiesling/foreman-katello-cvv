@@ -7,6 +7,9 @@ import {
   Button,
 } from "@patternfly/react-core";
 
+import { AuthContext } from "../utils/AuthProvider";
+
+
 import "./Login.css";
 
 export default function LoginForm() {
@@ -20,11 +23,13 @@ export default function LoginForm() {
     showHelperText: false,
   });
 
-  const [basicAuth, setBasicAuth] = React.useState("");
+  const { basicAuth, setBasicAuth } = React.useContext(AuthContext);
+
+  // const [basicAuth, setBasicAuth] = React.useState("");
 
   React.useEffect(() => {
     setBasicAuth(window.btoa(`${state.usernameValue}:${state.passwordValue}`));
-  }, [state.usernameValue, state.passwordValue]);
+  }, [state.usernameValue, state.passwordValue, setBasicAuth]);
 
   const onRememberMeClick = () => {
     setState({ ...state, isRememberMeChecked: !state.isRememberMeChecked });
@@ -44,7 +49,7 @@ export default function LoginForm() {
 
   const onSubmitClick = (e) => {
     e.preventDefault();
-    fetch(`https://${state.serverName}/katello/api/content_views`, {
+    fetch(`https://${state.serverName}/api/users/${state.usernameValue}`, {
       method: "GET",
       headers: {
         Authorization: `Basic ${basicAuth}`,
@@ -53,9 +58,9 @@ export default function LoginForm() {
       .then((response) => response.json())
       .then((jsonResponse) => {
         console.log(jsonResponse);
-        alert(`Server says there are ${jsonResponse.total} Content Views.\nThe full response is in the console.`);
+        alert(`Hello ${jsonResponse.firstname} ${jsonResponse.lastname}!\nThe full response is in the console.`);
       })
-      .catch((e) => console.error(e));
+      .catch((err) => console.error(err));
   };
 
   return (
