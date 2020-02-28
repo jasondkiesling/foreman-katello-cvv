@@ -18,5 +18,5 @@ export function setCookie(cookieName, cookieValue, expirationDays = 0) {
   const d = new Date();
   d.setTime(d.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
   const expires = `expires=${d.toUTCString()};`;
-  document.cookie = `${cookieName}=${cookieValue};${expirationDays > 0 ? expires : null}path=/`;
+  document.cookie = `${cookieName}=${cookieValue};${expirationDays !== 0 ? expires : null}path=/`;
 }
