@@ -41,6 +41,7 @@ header > img.header-logo {
 form.login-form > span.pf-c-label {
   text-align: left;
   padding-left: calc((100% - var(--input-width)) / 2);
+  padding-right: calc((100% - var(--input-width)) / 2);
   margin-bottom: 0.25em;
 }
 
@@ -72,4 +73,10 @@ form.login-form > button#submit {
   margin-left: auto;
   margin-right: auto;
   border-radius: 0.5em;
+}
+
+#error-invalid-login {
+  color: red;
+  text-align: center;
+  font-weight: bold;
 }

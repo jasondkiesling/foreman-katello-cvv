@@ -21,15 +21,10 @@ export default function LoginForm() {
     passwordValue: "",
     isValidPassword: false,
     showHelperText: false,
+    loginRejected: false,
   });
 
-  const { basicAuth, setBasicAuth } = React.useContext(AuthContext);
-
-  // const [basicAuth, setBasicAuth] = React.useState("");
-
-  React.useEffect(() => {
-    setBasicAuth(window.btoa(`${state.usernameValue}:${state.passwordValue}`));
-  }, [state.usernameValue, state.passwordValue, setBasicAuth]);
+  const { setBasicAuth, setUser } = React.useContext(AuthContext);
 
   const onRememberMeClick = () => {
     setState({ ...state, isRememberMeChecked: !state.isRememberMeChecked });
@@ -49,16 +44,24 @@ export default function LoginForm() {
 
   const onSubmitClick = (e) => {
     e.preventDefault();
+    setState({ ...state, loginRejected: false });
     fetch(`https://${state.serverName}/api/users/${state.usernameValue}`, {
       method: "GET",
       headers: {
-        Authorization: `Basic ${basicAuth}`,
+        Authorization: `Basic ${window.btoa(`${state.usernameValue}:${state.passwordValue}`)}`,
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          setState({ ...state, loginRejected: true });
+          return Promise.reject("Server rejected authentication");  //eslint-disable-line
+        }
+        return response.json();
+      })
       .then((jsonResponse) => {
-        console.log(jsonResponse);
-        alert(`Hello ${jsonResponse.firstname} ${jsonResponse.lastname}!\nThe full response is in the console.`);
+        setBasicAuth(window.btoa(`${state.usernameValue}:${state.passwordValue}`), state.isRememberMeChecked ? 30 : 0);
+        setUser({ firstName: jsonResponse.firstname, lastName: jsonResponse.lastName });
+        window.location.assign("/");
       })
       .catch((err) => console.error(err));
   };
@@ -66,6 +69,7 @@ export default function LoginForm() {
   return (
     <form className="login-form">
       <h4>Log in to your account</h4>
+      {state.loginRejected ? <Label id="error-invalid-login">Error: Invalid Login Credentials</Label> : null}
       <Label>Server Address:</Label>
       <TextInput
         id="server_address"
