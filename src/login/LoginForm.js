@@ -24,7 +24,7 @@ export default function LoginForm() {
     loginRejected: false,
   });
 
-  const { setBasicAuth, setUser } = React.useContext(AuthContext);
+  const { setBasicAuth } = React.useContext(AuthContext);
 
   const onRememberMeClick = () => {
     setState({ ...state, isRememberMeChecked: !state.isRememberMeChecked });
@@ -56,12 +56,9 @@ export default function LoginForm() {
           setState({ ...state, loginRejected: true });
           return Promise.reject("Server rejected authentication");  //eslint-disable-line
         }
-        return response.json();
-      })
-      .then((jsonResponse) => {
-        setBasicAuth(window.btoa(`${state.usernameValue}:${state.passwordValue}`), state.isRememberMeChecked ? 30 : 0);
-        setUser({ firstName: jsonResponse.firstname, lastName: jsonResponse.lastName });
+        setBasicAuth(window.btoa(`${state.usernameValue}:${state.passwordValue}`), state.serverName, state.usernameValue, state.isRememberMeChecked ? 30 : 0);
         window.location.assign("/");
+        return Promise.resolve();
       })
       .catch((err) => console.error(err));
   };
