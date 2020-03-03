@@ -7,6 +7,9 @@ import {
   Button,
 } from "@patternfly/react-core";
 
+import { AuthContext } from "../utils/AuthProvider";
+
+
 import "./Login.css";
 
 export default function LoginForm() {
@@ -18,13 +21,10 @@ export default function LoginForm() {
     passwordValue: "",
     isValidPassword: false,
     showHelperText: false,
+    loginRejected: false,
   });
 
-  const [basicAuth, setBasicAuth] = React.useState("");
-
-  React.useEffect(() => {
-    setBasicAuth(window.btoa(`${state.usernameValue}:${state.passwordValue}`));
-  }, [state.usernameValue, state.passwordValue]);
+  const { setBasicAuth } = React.useContext(AuthContext);
 
   const onRememberMeClick = () => {
     setState({ ...state, isRememberMeChecked: !state.isRememberMeChecked });
@@ -42,18 +42,29 @@ export default function LoginForm() {
     setState({ ...state, serverName: val });
   };
 
+<<<<<<< HEAD
   const onSubmitClick = (event) => {
     event.preventDefault();
     fetch(`https://${state.serverName}/katello/api/content_views`, {
+=======
+  const onSubmitClick = (e) => {
+    e.preventDefault();
+    setState({ ...state, loginRejected: false });
+    fetch(`https://${state.serverName}/api/users/${state.usernameValue}`, {
+>>>>>>> 03041e319f6a44a469e13bbe0bd115a553dedda7
       method: "GET",
       headers: {
-        Authorization: `Basic ${basicAuth}`,
+        Authorization: `Basic ${window.btoa(`${state.usernameValue}:${state.passwordValue}`)}`,
       },
     })
-      .then((response) => response.json())
-      .then((jsonResponse) => {
-        console.log(jsonResponse);
-        alert(`Server says there are ${jsonResponse.total} Content Views.\nThe full response is in the console.`);
+      .then((response) => {
+        if (!response.ok) {
+          setState({ ...state, loginRejected: true });
+          return Promise.reject("Server rejected authentication");  //eslint-disable-line
+        }
+        setBasicAuth(window.btoa(`${state.usernameValue}:${state.passwordValue}`), state.serverName, state.usernameValue, state.isRememberMeChecked ? 30 : 0);
+        window.location.assign("/");
+        return Promise.resolve();
       })
       .catch((err) => console.error(err));
   };
@@ -61,6 +72,7 @@ export default function LoginForm() {
   return (
     <form className="login-form">
       <h4>Log in to your account</h4>
+      {state.loginRejected ? <Label id="error-invalid-login">Error: Invalid Login Credentials</Label> : null}
       <Label>Server Address:</Label>
       <TextInput
         id="server_address"
