@@ -5,7 +5,13 @@ import { getCookie, setCookie } from "./CookieUtils";
 export const AuthContext = React.createContext();
 
 export default function AuthProvider({ children }) {
-  const [basicAuth, setBasicAuth] = React.useState({ basicAuth: undefined, host: undefined, username: undefined });
+  const [basicAuth, setBasicAuth] = React.useState(
+    {
+      basicAuth: undefined,
+      host: undefined,
+      username: undefined,
+    },
+  );
 
   const basicAuthCookieName = "basicAuthToken";
   const hostCookieName = "hostName";

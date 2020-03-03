@@ -5,12 +5,12 @@ import "./CVV.css";
 import AuthProvider from "../utils/AuthProvider";
 import CVVModals from "./CVVModals";
 
-export default function ContentViewVersions() {
+export default function ContentViewVersions({ match }) {
   return (
     <AuthProvider>
       <div id="Modals">
         <Header />
-        <CVVModals />
+        <CVVModals match={match} />
       </div>
     </AuthProvider>
   );

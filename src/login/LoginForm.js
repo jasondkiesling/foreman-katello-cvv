@@ -66,7 +66,10 @@ export default function LoginForm() {
         window.location.assign("/");
         return Promise.resolve();
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setState({ ...state, loginRejected: true });
+        console.error(err);
+      });
   };
 
   return (
