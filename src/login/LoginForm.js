@@ -42,16 +42,10 @@ export default function LoginForm() {
     setState({ ...state, serverName: val });
   };
 
-<<<<<<< HEAD
-  const onSubmitClick = (event) => {
-    event.preventDefault();
-    fetch(`https://${state.serverName}/katello/api/content_views`, {
-=======
   const onSubmitClick = (e) => {
     e.preventDefault();
     setState({ ...state, loginRejected: false });
     fetch(`https://${state.serverName}/api/users/${state.usernameValue}`, {
->>>>>>> 03041e319f6a44a469e13bbe0bd115a553dedda7
       method: "GET",
       headers: {
         Authorization: `Basic ${window.btoa(`${state.usernameValue}:${state.passwordValue}`)}`,
