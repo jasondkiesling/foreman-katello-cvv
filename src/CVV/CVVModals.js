@@ -46,42 +46,52 @@ export default function CVVModals({ match }) {
           </div>
           <div id="drag-n-drop">
             <strong id="NLE">No Lifecycle Environment:</strong>
-            <Card isHoverable>
-              <CardHeader>Placeholder</CardHeader>
-              <CardBody>Body</CardBody>
-              <CardFooter>End</CardFooter>
-            </Card>
-            <Card isHoverable>
-              <CardHeader>Placeholder</CardHeader>
-              <CardBody>Body</CardBody>
-              <CardFooter>End</CardFooter>
-            </Card>
-            <strong id="Library">Library:</strong>
-            {cvv.environments.map(cvv_env => (
+            <div className="card-container">
               <Card isHoverable>
-                <CardHeader>{cvv_env.name}</CardHeader>
-                <CardBody>{cvv_env.label}</CardBody>
+                <CardHeader>Placeholder</CardHeader>
+                <CardBody>Body</CardBody>
                 <CardFooter>End</CardFooter>
               </Card>
-            ))}
+              <Card isHoverable>
+                <CardHeader>Placeholder</CardHeader>
+                <CardBody>Body</CardBody>
+                <CardFooter>End</CardFooter>
+              </Card>
+            </div>
+            <strong id="Library">Library:</strong>
+            <div className="card-container">
+              {cvv.environments.map(cvv_env => (
+                <Card isHoverable>
+                  <CardHeader>{cvv_env.name}</CardHeader>
+                  <CardBody>{cvv_env.label}</CardBody>
+                  <CardFooter>End</CardFooter>
+                </Card>
+              ))}
+            </div>
             <strong id="Testing">Testing:</strong>
-            <Card isHoverable>
-              <CardHeader>Placeholder</CardHeader>
-              <CardBody>Body</CardBody>
-              <CardFooter>End</CardFooter>
-            </Card>
+            <div className="card-container">
+              <Card isHoverable>
+                <CardHeader>Placeholder</CardHeader>
+                <CardBody>Body</CardBody>
+                <CardFooter>End</CardFooter>
+              </Card>
+            </div>
             <strong id="Development">Development:</strong>
-            <Card isHoverable>
-              <CardHeader>Placeholder</CardHeader>
-              <CardBody>Body</CardBody>
-              <CardFooter>End</CardFooter>
-            </Card>
+            <div className="card-container">
+              <Card isHoverable>
+                <CardHeader>Placeholder</CardHeader>
+                <CardBody>Body</CardBody>
+                <CardFooter>End</CardFooter>
+              </Card>
+            </div>
             <strong id="Production">Production:</strong>
-            <Card isHoverable>
-              <CardHeader>Placeholder</CardHeader>
-              <CardBody>Body</CardBody>
-              <CardFooter>End</CardFooter>
-            </Card>
+            <div className="card-container">
+              <Card isHoverable>
+                <CardHeader>Placeholder</CardHeader>
+                <CardBody>Body</CardBody>
+                <CardFooter>End</CardFooter>
+              </Card>
+            </div>
           </div>
         </div>
       ))}
