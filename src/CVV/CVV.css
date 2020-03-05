@@ -1,17 +1,9 @@
-#Modals {
-  background-color: whitesmoke;
-  height: 100vh;
-}
-
-#environments {
-  text-align: left;
-}
-
 #content-view {
   text-align: center;
   padding: 20px;
 }
 
-h3 {
-  padding: 30px;
+article {
+  width: 10%;
+  text-align: center;
 }
