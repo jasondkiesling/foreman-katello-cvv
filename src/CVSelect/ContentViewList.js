@@ -35,7 +35,8 @@ export default function ContentViewList() {
       });
   }, [basicAuth]);
 
-  const handleOnClick = (id, e) => {
+  // eslint-disable-next-line no-unused-vars
+  const handleOnClick = (id, _e) => {
     window.location.assign(`https://localhost:3000/content-view/${id}`);
   };
 
