@@ -2,11 +2,13 @@ import React from "react";
 import {
   Card,
   CardHeader,
-  Cardbody,
+  CardBody,
   CardFooter,
   Button
 } from "@patternfly/react-core";
+import "@patternfly/react-core/dist/styles/base.css";
 import { AuthContext } from "../utils/AuthProvider";
+import "./CVV.css";
 
 export default function CVVModals({ match }) {
   const { basicAuth } = React.useContext(AuthContext);
@@ -43,16 +45,43 @@ export default function CVVModals({ match }) {
             {cvv.name}
           </div>
           <div id="drag-n-drop">
-            <h3 id="NLE">No Lifecycle Environment</h3>
-            <h3 id="Library">Library</h3>
+            <strong id="NLE">No Lifecycle Environment:</strong>
+            <Card isHoverable>
+              <CardHeader>Placeholder</CardHeader>
+              <CardBody>Body</CardBody>
+              <CardFooter>End</CardFooter>
+            </Card>
+            <Card isHoverable>
+              <CardHeader>Placeholder</CardHeader>
+              <CardBody>Body</CardBody>
+              <CardFooter>End</CardFooter>
+            </Card>
+            <strong id="Library">Library:</strong>
             {cvv.environments.map(cvv_env => (
-              <Card isHoverable value={cvv_env.name}>
+              <Card isHoverable>
                 <CardHeader>{cvv_env.name}</CardHeader>
+                <CardBody>{cvv_env.label}</CardBody>
+                <CardFooter>End</CardFooter>
               </Card>
             ))}
-            <h3 id="Testing">Testing</h3>
-            <h3 id="Development">Development</h3>
-            <h3 id="Production">Production</h3>
+            <strong id="Testing">Testing:</strong>
+            <Card isHoverable>
+              <CardHeader>Placeholder</CardHeader>
+              <CardBody>Body</CardBody>
+              <CardFooter>End</CardFooter>
+            </Card>
+            <strong id="Development">Development:</strong>
+            <Card isHoverable>
+              <CardHeader>Placeholder</CardHeader>
+              <CardBody>Body</CardBody>
+              <CardFooter>End</CardFooter>
+            </Card>
+            <strong id="Production">Production:</strong>
+            <Card isHoverable>
+              <CardHeader>Placeholder</CardHeader>
+              <CardBody>Body</CardBody>
+              <CardFooter>End</CardFooter>
+            </Card>
           </div>
         </div>
       ))}
