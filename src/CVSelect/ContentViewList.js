@@ -35,7 +35,7 @@ export default function ContentViewList() {
       });
   }, [basicAuth]);
 
-  const handleOnClick = (id) => {
+  const handleOnClick = (id, e) => {
     window.location.assign(`https://localhost:3000/content-view/${id}`);
   };
 
@@ -44,8 +44,8 @@ export default function ContentViewList() {
       <TextInput id="cv-search" className="searchbar" type="text" placeholder="Search Content Views..." />
       {contentViews.map((cv) => (
         <div key={cv.id}>
-          <Button id="card-button">
-            <Card isCompact value={cv.id} onClick={handleOnClick}>
+          <Button id="card-button" onClick={(e) => handleOnClick(cv.id, e)}>
+            <Card isCompact>
               <CardHeader>{cv.name}</CardHeader>
               <CardBody>
                 <strong>Description:</strong>
