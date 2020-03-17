@@ -20,7 +20,7 @@ header#login-header > h3 {
   text-align: center;
 }
 
-header > img.header-logo {
+header#login-header > img.header-logo {
   object-fit: contain;
   margin-left: auto;
   margin-right: auto;
