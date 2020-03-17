@@ -3,6 +3,9 @@ import React from "react";
 import { getCookie, setCookie } from "./CookieUtils";
 
 export const AuthContext = React.createContext();
+export const basicAuthCookieName = "basicAuthToken";
+export const hostCookieName = "hostName";
+export const usernameCookieName = "username";
 
 export default function AuthProvider({ children }) {
   const [basicAuth, setBasicAuth] = React.useState(
@@ -13,9 +16,6 @@ export default function AuthProvider({ children }) {
     },
   );
 
-  const basicAuthCookieName = "basicAuthToken";
-  const hostCookieName = "hostName";
-  const usernameCookieName = "username";
   const setAuthAndCookie = (basicAuthCode, host, username, cookieTimeLength = 0) => {
     setBasicAuth(basicAuthCode);
     setCookie(basicAuthCookieName, basicAuthCode, cookieTimeLength);
