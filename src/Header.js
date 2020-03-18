@@ -1,6 +1,9 @@
 import React from "react";
 
-import { AuthContext } from "./utils/AuthProvider";
+import {
+  AuthContext, basicAuthCookieName, hostCookieName, usernameCookieName,
+} from "./utils/AuthProvider";
+import { setCookie } from "./utils/CookieUtils";
 
 import "./Header.css";
 
@@ -22,6 +25,13 @@ export default function Header() {
     });
   }, [basicAuth]);
 
+  const handleLogout = () => {
+    setCookie(basicAuthCookieName, "", -1);
+    setCookie(usernameCookieName, "", -1);
+    setCookie(hostCookieName, "", -1);
+    window.location.assign("/login");
+  };
+
   return (
     <header className="page-header">
       <img
@@ -31,6 +41,7 @@ export default function Header() {
       />
       <img src="/foreman_text.png" alt="Foreman" className="header-logo text" />
       <p>{`${user.firstName} ${user.lastName}`}</p>
+      <button type="button" onClick={handleLogout}>logout</button>
     </header>
   );
 }
