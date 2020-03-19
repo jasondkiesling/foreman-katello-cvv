@@ -56,17 +56,17 @@ header.page-header {
   height: var(--header-height);
   display: flex;
   flex-direction: row;
-  align-content: center;
+  align-items: center;
   background-color: var(--foreman-blue);
 }
 
-header > a > .header-logo {
-  height: calc(var(--header-height) * 0.8);
-  margin: calc(var(--header-height) * 0.1);
+header > a > .helmet {
+  height: calc(var(--header-height) * 0.7);
+  margin: calc(var(--header-height) * 0.15);
 }
 
 header > a > .text {
-  height: calc(var(--header-height) * 0.5);
-  margin: calc(var(--header-height) * 0.25);
+  height: calc(var(--header-height) * 0.4);
+  margin: calc(var(--header-height) * 0.3);
   margin-left: 0;
 }
