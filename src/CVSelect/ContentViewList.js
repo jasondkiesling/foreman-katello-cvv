@@ -35,17 +35,24 @@ export default function ContentViewList() {
       });
   }, [basicAuth]);
 
-  // eslint-disable-next-line no-unused-vars
-  const handleOnClick = (id, _e) => {
-    window.location.assign(`https://localhost:3000/content-view/${id}`);
+  const handleOnClick = (id) => {
+    window.location.assign(`/content-view/${id}`);
   };
+
+  const handleOnSearchChange = () => {};
 
   return (
     <div className="cv-select">
-      <TextInput id="cv-search" className="searchbar" type="text" placeholder="Search Content Views..." />
+      <TextInput
+        id="cv-search"
+        className="searchbar"
+        type="text"
+        placeholder="Search Content Views..."
+        onChange={handleOnSearchChange}
+      />
       {contentViews.map((cv) => (
         <div key={cv.id}>
-          <Button id="card-button" onClick={(e) => handleOnClick(cv.id, e)}>
+          <Button id="card-button" onClick={() => handleOnClick(cv.id)}>
             <Card isCompact>
               <CardHeader>{cv.name}</CardHeader>
               <CardBody>
