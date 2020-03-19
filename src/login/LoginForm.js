@@ -16,7 +16,7 @@ export default function LoginForm() {
     passwordValue: "",
     isValidPassword: false,
     showHelperText: false,
-    loginRejected: false
+    loginRejected: false,
   });
 
   const { setBasicAuth } = React.useContext(AuthContext);
@@ -25,30 +25,30 @@ export default function LoginForm() {
     setState({ ...state, isRememberMeChecked: !state.isRememberMeChecked });
   };
 
-  const handleUsernameChange = val => {
+  const handleUsernameChange = (val) => {
     setState({ ...state, usernameValue: val });
   };
 
-  const handlePasswordChange = val => {
+  const handlePasswordChange = (val) => {
     setState({ ...state, passwordValue: val });
   };
 
-  const handleServerNameChange = val => {
+  const handleServerNameChange = (val) => {
     setState({ ...state, serverName: val });
   };
 
-  const onSubmitClick = e => {
+  const onSubmitClick = (e) => {
     e.preventDefault();
     setState({ ...state, loginRejected: false });
     fetch(`https://${state.serverName}/api/users/${state.usernameValue}`, {
       method: "GET",
       headers: {
         Authorization: `Basic ${window.btoa(
-          `${state.usernameValue}:${state.passwordValue}`
-        )}`
-      }
+          `${state.usernameValue}:${state.passwordValue}`,
+        )}`,
+      },
     })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
           setState({ ...state, loginRejected: true });
           return Promise.reject("Server rejected authentication"); //eslint-disable-line
@@ -57,7 +57,7 @@ export default function LoginForm() {
           window.btoa(`${state.usernameValue}:${state.passwordValue}`),
           state.serverName,
           state.usernameValue,
-          state.isRememberMeChecked ? 30 : 0
+          state.isRememberMeChecked ? 30 : 0,
         );
         const queryStrings = qs.parse(window.location.search.slice(1));
         if (queryStrings.redirect) {
@@ -67,7 +67,7 @@ export default function LoginForm() {
         }
         return Promise.resolve();
       })
-      .catch(err => {
+      .catch((err) => {
         setState({ ...state, loginRejected: true });
         console.error(err);
       });

@@ -15,12 +15,12 @@ export default function CVVModals({ match }) {
       {
         method: "GET",
         headers: {
-          Authorization: `Basic ${basicAuth.basicAuth}`
-        }
-      }
+          Authorization: `Basic ${basicAuth.basicAuth}`,
+        },
+      },
     )
-      .then(response => response.json())
-      .then(jsonResponse => {
+      .then((response) => response.json())
+      .then((jsonResponse) => {
         setCVVs(jsonResponse.results);
       });
   }, [basicAuth, match.params.id]);
@@ -28,7 +28,7 @@ export default function CVVModals({ match }) {
   return (
     <div id="environments">
       {cvvs
-        ? cvvs.map(cvv => (
+        ? cvvs.map((cvv) => (
             <div key={cvv.id}>
               <strong>Version:&nbsp;</strong>
               {cvv.version}
