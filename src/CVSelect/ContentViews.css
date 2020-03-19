@@ -10,7 +10,6 @@
   background-color: white;
   width: 50%;
   margin: 20px;
-  box-shadow: var(--pf-c-card--BoxShadow);
 }
 
 .cv-select .searchbar {
