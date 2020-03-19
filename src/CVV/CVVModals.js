@@ -16,13 +16,14 @@ export default function CVVModals({ match }) {
         Authorization: `Basic ${basicAuth.basicAuth}`,
       },
     }).then((response) => response.json()).then((jsonResponse) => {
+      console.log(jsonResponse);
       setCVVs(jsonResponse.results);
     });
   }, [basicAuth, match.params.id]);
 
   return (
     <div id="environments">
-      {cvvs.map((cvv) => (
+      {cvvs ? cvvs.map((cvv) => (
         <div key={cvv.id}>
           <strong>
             Version:&nbsp;
@@ -34,7 +35,7 @@ export default function CVVModals({ match }) {
           </strong>
           {cvv.name}
         </div>
-      ))}
+      )) : null}
       <h3 id="NLE">No Lifecycle Environment</h3>
       <h3 id="Library">Library</h3>
       <h3 id="Testing">Testing</h3>
