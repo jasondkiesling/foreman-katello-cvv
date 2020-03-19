@@ -1,25 +1,23 @@
 import React from "react";
 
-import {
-  Dropdown,
-  DropdownToggle,
-  DropdownItem,
-} from "@patternfly/react-core";
+import { Dropdown, DropdownToggle, DropdownItem } from "@patternfly/react-core";
 import { CaretDownIcon } from "@patternfly/react-icons";
 import "@patternfly/react-core/dist/styles/base.css";
 
 import {
-  AuthContext, basicAuthCookieName, hostCookieName, usernameCookieName,
+  AuthContext,
+  basicAuthCookieName,
+  hostCookieName,
+  usernameCookieName,
 } from "./utils/AuthProvider";
 import { setCookie } from "./utils/CookieUtils";
-
 
 import "./Header.css";
 
 export default function Header() {
   const { basicAuth } = React.useContext(AuthContext);
   const [user, setUser] = React.useState({ firstName: "", lastName: "" });
-  const [menuOpen, setMenuOpen] = React.useState(false);
+  const [menuOpen, setMenuOpen] = React.useState(true);
 
   React.useEffect(() => {
     if (!basicAuth.basicAuth || !basicAuth.host || !basicAuth.username) {
@@ -30,9 +28,14 @@ export default function Header() {
       headers: {
         Authorization: `Basic ${basicAuth.basicAuth}`,
       },
-    }).then((response) => response.json()).then((jsonResponse) => {
-      setUser({ firstName: jsonResponse.firstname, lastName: jsonResponse.lastname });
-    });
+    })
+      .then((response) => response.json())
+      .then((jsonResponse) => {
+        setUser({
+          firstName: jsonResponse.firstname,
+          lastName: jsonResponse.lastname,
+        });
+      });
   }, [basicAuth]);
 
   const handleLogout = () => {
@@ -52,14 +55,24 @@ export default function Header() {
       <img src="/foreman_text.png" alt="Foreman" className="header-logo text" />
       <Dropdown
         id="header-menu"
-        toggle={(
-          <DropdownToggle id="header-menu-toggle" onToggle={() => setMenuOpen(!menuOpen)} iconComponent={CaretDownIcon}>
+        toggle={
+          <DropdownToggle
+            id="header-menu-toggle"
+            onToggle={() => setMenuOpen(!menuOpen)}
+            iconComponent={CaretDownIcon}
+          >
             {`${user.firstName} ${user.lastName}`}
           </DropdownToggle>
-        )}
+        }
         isOpen={menuOpen}
       >
-        <DropdownItem key="logout" className="header-menu-item" onClick={handleLogout}>Logout</DropdownItem>
+        <DropdownItem
+          key="logout"
+          className="header-menu-item"
+          onClick={handleLogout}
+        >
+          Logout
+        </DropdownItem>
       </Dropdown>
     </header>
   );
