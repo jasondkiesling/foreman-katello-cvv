@@ -12,6 +12,7 @@ import {
 } from "./utils/AuthProvider";
 import { setCookie } from "./utils/CookieUtils";
 
+import "./App.css";
 import "./Header.css";
 
 export default function Header() {
