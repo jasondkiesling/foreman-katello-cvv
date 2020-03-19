@@ -60,12 +60,12 @@ header.page-header {
   background-color: var(--foreman-blue);
 }
 
-header > .header-logo {
+header > a > .header-logo {
   height: calc(var(--header-height) * 0.8);
   margin: calc(var(--header-height) * 0.1);
 }
 
-header > .text {
+header > a > .text {
   height: calc(var(--header-height) * 0.5);
   margin: calc(var(--header-height) * 0.25);
   margin-left: 0;

@@ -48,12 +48,18 @@ export default function Header() {
 
   return (
     <header className="page-header">
-      <img
-        src="/foreman_helmet.svg"
-        alt="Helmet"
-        className="header-logo helmet"
-      />
-      <img src="/foreman_text.png" alt="Foreman" className="header-logo text" />
+      <a href="/">
+        <img
+          src="/foreman_helmet.svg"
+          alt="Helmet"
+          className="header-logo helmet"
+        />
+        <img
+          src="/foreman_text.png"
+          alt="Foreman"
+          className="header-logo text"
+        />
+      </a>
       <Dropdown
         id="header-menu"
         toggle={
