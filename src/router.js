@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ContentViews from "./ContentViews";
+import ContentViews from "./CVSelect/ContentViews";
 import LoginPage from "./login/LoginPage";
 import ContentViewVersions from "./CVV/ContentViewVersions";
 
