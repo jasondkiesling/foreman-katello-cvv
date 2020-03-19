@@ -28,7 +28,11 @@ export default function AuthProvider({ children }) {
     const hostCookie = getCookie(hostCookieName);
     const usernameCookie = getCookie(usernameCookieName);
     if (window.location.pathname !== "/login" && (!basicAuthCookie || !hostCookie || !usernameCookie)) {
-      window.location.assign("/login");
+      if (window.location.pathname === "/") {
+        window.location.assign("/login");
+      } else {
+        window.location.assign(`/login?redirect=${window.location.pathname}`);
+      }
     } else if (window.location.pathname === "/login" && basicAuthCookie && hostCookie && usernameCookie) {
       window.location.assign("/");
     }

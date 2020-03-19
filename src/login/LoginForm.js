@@ -1,14 +1,9 @@
 import React from "react";
 
-import {
-  TextInput,
-  Label,
-  Checkbox,
-  Button,
-} from "@patternfly/react-core";
+import { TextInput, Label, Checkbox, Button } from "@patternfly/react-core";
+import qs from "querystring";
 
 import { AuthContext } from "../utils/AuthProvider";
-
 
 import "./Login.css";
 
@@ -21,7 +16,7 @@ export default function LoginForm() {
     passwordValue: "",
     isValidPassword: false,
     showHelperText: false,
-    loginRejected: false,
+    loginRejected: false
   });
 
   const { setBasicAuth } = React.useContext(AuthContext);
@@ -30,37 +25,49 @@ export default function LoginForm() {
     setState({ ...state, isRememberMeChecked: !state.isRememberMeChecked });
   };
 
-  const handleUsernameChange = (val) => {
+  const handleUsernameChange = val => {
     setState({ ...state, usernameValue: val });
   };
 
-  const handlePasswordChange = (val) => {
+  const handlePasswordChange = val => {
     setState({ ...state, passwordValue: val });
   };
 
-  const handleServerNameChange = (val) => {
+  const handleServerNameChange = val => {
     setState({ ...state, serverName: val });
   };
 
-  const onSubmitClick = (e) => {
+  const onSubmitClick = e => {
     e.preventDefault();
     setState({ ...state, loginRejected: false });
     fetch(`https://${state.serverName}/api/users/${state.usernameValue}`, {
       method: "GET",
       headers: {
-        Authorization: `Basic ${window.btoa(`${state.usernameValue}:${state.passwordValue}`)}`,
-      },
+        Authorization: `Basic ${window.btoa(
+          `${state.usernameValue}:${state.passwordValue}`
+        )}`
+      }
     })
-      .then((response) => {
+      .then(response => {
         if (!response.ok) {
           setState({ ...state, loginRejected: true });
-          return Promise.reject("Server rejected authentication");  //eslint-disable-line
+          return Promise.reject("Server rejected authentication"); //eslint-disable-line
         }
-        setBasicAuth(window.btoa(`${state.usernameValue}:${state.passwordValue}`), state.serverName, state.usernameValue, state.isRememberMeChecked ? 30 : 0);
-        window.location.assign("/");
+        setBasicAuth(
+          window.btoa(`${state.usernameValue}:${state.passwordValue}`),
+          state.serverName,
+          state.usernameValue,
+          state.isRememberMeChecked ? 30 : 0
+        );
+        const queryStrings = qs.parse(window.location.search.slice(1));
+        if (queryStrings.redirect) {
+          window.location.assign(queryStrings.redirect);
+        } else {
+          window.location.assign("/");
+        }
         return Promise.resolve();
       })
-      .catch((err) => {
+      .catch(err => {
         setState({ ...state, loginRejected: true });
         console.error(err);
       });
@@ -69,7 +76,9 @@ export default function LoginForm() {
   return (
     <form className="login-form">
       <h4>Log in to your account</h4>
-      {state.loginRejected ? <Label id="error-invalid-login">Error: Invalid Login Credentials</Label> : null}
+      {state.loginRejected ? (
+        <Label id="error-invalid-login">Error: Invalid Login Credentials</Label>
+      ) : null}
       <Label>Server Address:</Label>
       <TextInput
         id="server_address"
