@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Dropdown, DropdownToggle, DropdownItem } from "@patternfly/react-core";
-import { CaretDownIcon } from "@patternfly/react-icons";
+import { CaretDownIcon, UserIcon, KeyIcon } from "@patternfly/react-icons";
 import "@patternfly/react-core/dist/styles/base.css";
 
 import {
@@ -61,6 +61,7 @@ export default function Header() {
             onToggle={() => setMenuOpen(!menuOpen)}
             iconComponent={CaretDownIcon}
           >
+            <UserIcon id="header-menu-user-icon" />
             {`${user.firstName} ${user.lastName}`}
           </DropdownToggle>
         }
@@ -71,6 +72,7 @@ export default function Header() {
           className="header-menu-item"
           onClick={handleLogout}
         >
+          <KeyIcon id="logout-icon" />
           Logout
         </DropdownItem>
       </Dropdown>

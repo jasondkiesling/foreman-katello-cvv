@@ -17,6 +17,17 @@ header > div#header-menu {
   height: 50%;
 }
 
+header
+  > div#header-menu
+  > button#header-menu-toggle
+  > span.pf-c-dropdown__toggle-text {
+  padding-right: 0.25em;
+}
+
+header > div#header-menu > button#header-menu-toggle #header-menu-user-icon {
+  padding-right: 0.25em;
+}
+
 header > div#header-menu > div.pf-c-dropdown__menu {
   background-color: var(--foreman-blue);
   padding: 0.25em;
@@ -35,6 +46,10 @@ header > div#header-menu > div.pf-c-dropdown__menu > li {
 
 header > div#header-menu > div.pf-c-dropdown__menu > li > a {
   color: white;
+}
+
+header > div#header-menu > div.pf-c-dropdown__menu > li > a > svg {
+  padding-right: 0.25em;
 }
 
 header.page-header {
