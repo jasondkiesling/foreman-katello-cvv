@@ -59,7 +59,7 @@ export default function Header() {
         )}
         isOpen={menuOpen}
       >
-        <DropdownItem key="logout" className="header-menu-item" onClick={() => { console.log("logout"); }}>Logout</DropdownItem>
+        <DropdownItem key="logout" className="header-menu-item" onClick={handleLogout}>Logout</DropdownItem>
       </Dropdown>
     </header>
   );
