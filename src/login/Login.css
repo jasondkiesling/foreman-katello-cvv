@@ -20,6 +20,10 @@ header#login-header > h3 {
   text-align: center;
 }
 
+form.login-form h4 {
+  margin-top: 1em;
+}
+
 header#login-header > img.header-logo {
   object-fit: contain;
   margin-left: auto;
