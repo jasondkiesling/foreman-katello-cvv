@@ -2,13 +2,13 @@
   --header-height: 10vh;
 }
 
-header {
+header.page-header {
   color: white;
   display: flex;
   align-items: center;
 }
 
-header > div#header-menu {
+header.page-header > div#header-menu {
   --pf-c-dropdown__toggle--BorderWidth: 0px;
   display: flex;
   margin-left: auto;
@@ -17,38 +17,41 @@ header > div#header-menu {
   height: 50%;
 }
 
-header
+header.page-header
   > div#header-menu
   > button#header-menu-toggle
   > span.pf-c-dropdown__toggle-text {
   padding-right: 0.25em;
 }
 
-header > div#header-menu > button#header-menu-toggle #header-menu-user-icon {
+header.page-header
+  > div#header-menu
+  > button#header-menu-toggle
+  #header-menu-user-icon {
   padding-right: 0.25em;
 }
 
-header > div#header-menu > div.pf-c-dropdown__menu {
+header.page-header > div#header-menu > div.pf-c-dropdown__menu {
   background-color: var(--foreman-blue);
   padding: 0.25em;
   border-radius: 0.25em;
   border: 1px solid white;
 }
 
-header > div#header-menu > button#header-menu-toggle {
+header.page-header > div#header-menu > button#header-menu-toggle {
   color: white;
   padding: 0.5em;
 }
 
-header > div#header-menu > div.pf-c-dropdown__menu > li {
+header.page-header > div#header-menu > div.pf-c-dropdown__menu > li {
   list-style-type: none;
 }
 
-header > div#header-menu > div.pf-c-dropdown__menu > li > a {
+header.page-header > div#header-menu > div.pf-c-dropdown__menu > li > a {
   color: white;
 }
 
-header > div#header-menu > div.pf-c-dropdown__menu > li > a > svg {
+header.page-header > div#header-menu > div.pf-c-dropdown__menu > li > a > svg {
   padding-right: 0.25em;
 }
 
@@ -60,12 +63,12 @@ header.page-header {
   background-color: var(--foreman-blue);
 }
 
-header > a > .helmet {
+header.page-header > a > .helmet {
   height: calc(var(--header-height) * 0.7);
   margin: calc(var(--header-height) * 0.15);
 }
 
-header > a > .text {
+header.page-header > a > .text {
   height: calc(var(--header-height) * 0.4);
   margin: calc(var(--header-height) * 0.3);
   margin-left: 0;

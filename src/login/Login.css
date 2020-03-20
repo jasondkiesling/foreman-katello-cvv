@@ -28,6 +28,12 @@ header#login-header > img.header-logo {
   object-fit: contain;
   margin-left: auto;
   margin-right: auto;
+  height: 15vh;
+}
+
+header#login-header > img.text {
+  margin-top: 1em;
+  height: 7.5vh;
 }
 
 .login-form {
