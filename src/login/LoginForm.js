@@ -7,6 +7,13 @@ import { AuthContext } from "../utils/AuthProvider";
 
 import "./Login.css";
 
+class LoginRejected extends Error {
+  constructor(...params) {
+    super(...params);
+    this.name = "Server rejected authentication";
+  }
+}
+
 export default function LoginForm() {
   const [state, setState] = React.useState({
     serverName: "",
@@ -17,6 +24,7 @@ export default function LoginForm() {
     isValidPassword: false,
     showHelperText: false,
     loginRejected: false,
+    invalidHost: false,
   });
 
   const { setBasicAuth } = React.useContext(AuthContext);
@@ -39,7 +47,7 @@ export default function LoginForm() {
 
   const onSubmitClick = (e) => {
     e.preventDefault();
-    setState({ ...state, loginRejected: false });
+    setState({ ...state, loginRejected: false, invalidHost: false });
     fetch(`https://${state.serverName}/api/users/${state.usernameValue}`, {
       method: "GET",
       headers: {
@@ -50,8 +58,7 @@ export default function LoginForm() {
     })
       .then((response) => {
         if (!response.ok) {
-          setState({ ...state, loginRejected: true });
-          return Promise.reject("Server rejected authentication"); //eslint-disable-line
+          throw new LoginRejected();
         }
         setBasicAuth(
           window.btoa(`${state.usernameValue}:${state.passwordValue}`),
@@ -68,7 +75,11 @@ export default function LoginForm() {
         return Promise.resolve();
       })
       .catch((err) => {
-        setState({ ...state, loginRejected: true });
+        if (err instanceof LoginRejected) {
+          setState({ ...state, loginRejected: true });
+        } else {
+          setState({ ...state, invalidHost: true });
+        }
         console.error(err);
       });
   };
@@ -78,6 +89,9 @@ export default function LoginForm() {
       <h4>Log in to your account</h4>
       {state.loginRejected ? (
         <Label id="error-invalid-login">Error: Invalid Login Credentials</Label>
+      ) : null}
+      {state.invalidHost ? (
+        <Label id="error-invalid-login">Error: Unable to Access Host</Label>
       ) : null}
       <Label>Server Address:</Label>
       <TextInput
