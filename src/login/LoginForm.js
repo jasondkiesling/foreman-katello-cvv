@@ -3,6 +3,7 @@ import React from "react";
 import { TextInput, Label, Checkbox, Button } from "@patternfly/react-core";
 import qs from "querystring";
 
+import LoginError from "./LoginError";
 import { AuthContext } from "../utils/AuthProvider";
 
 import "./Login.css";
@@ -76,9 +77,9 @@ export default function LoginForm() {
       })
       .catch((err) => {
         if (err instanceof LoginRejected) {
-          setState({ ...state, loginRejected: true });
+          setState({ ...state, invalidHost: false, loginRejected: true });
         } else {
-          setState({ ...state, invalidHost: true });
+          setState({ ...state, loginRejected: false, invalidHost: true });
         }
         console.error(err);
       });
@@ -88,10 +89,10 @@ export default function LoginForm() {
     <form className="login-form">
       <h4>Log in to your account</h4>
       {state.loginRejected ? (
-        <Label id="error-invalid-login">Error: Invalid Login Credentials</Label>
+        <LoginError message="Error: Invalid Login Credentials" />
       ) : null}
       {state.invalidHost ? (
-        <Label id="error-invalid-login">Error: Unable to Access Host</Label>
+        <LoginError message="Error: Unable to Access Host" />
       ) : null}
       <Label>Server Address:</Label>
       <TextInput

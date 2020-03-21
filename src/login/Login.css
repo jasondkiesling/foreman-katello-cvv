@@ -85,8 +85,16 @@ form.login-form > button#submit {
   border-radius: 0.5em;
 }
 
-#error-invalid-login {
+form.login-form > div.error-invalid-login {
   color: red;
   text-align: center;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+form.login-form > div.error-invalid-login > svg.login-error-icon {
+  height: 2em;
+  width: 2em;
 }
