@@ -18,7 +18,7 @@ import "./Header.css";
 export default function Header() {
   const { basicAuth } = React.useContext(AuthContext);
   const [user, setUser] = React.useState({ firstName: "", lastName: "" });
-  const [menuOpen, setMenuOpen] = React.useState(true);
+  const [menuOpen, setMenuOpen] = React.useState(false);
 
   React.useEffect(() => {
     if (!basicAuth.basicAuth || !basicAuth.host || !basicAuth.username) {
