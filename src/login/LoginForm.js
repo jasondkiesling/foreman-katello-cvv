@@ -58,13 +58,14 @@ export default function LoginForm() {
       if (err instanceof MissingLoginArguments) {
         setState({
           ...state,
-          errorMessage: "Server Name, Username, and Password are all required",
+          errorMessage:
+            "Server Address, Username, and Password are all required",
         });
         return;
       }
     }
     e.preventDefault();
-    setState({ ...state, loginRejected: false, invalidHost: false });
+    setState({ ...state, errorMessage: "" });
     fetch(`https://${state.serverName}/api/users/${state.usernameValue}`, {
       method: "GET",
       headers: {
