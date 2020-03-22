@@ -135,11 +135,7 @@ export default function LoginForm() {
           onClick={onRememberMeClick}
         />
       </div>
-      <Button
-        id="submit"
-        // type="submit"
-        onClick={onSubmitClick}
-      >
+      <Button id="submit" onClick={onSubmitClick}>
         Submit!
       </Button>
     </form>
