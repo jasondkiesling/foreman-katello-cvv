@@ -8,6 +8,13 @@ import { AuthContext } from "../utils/AuthProvider";
 
 import "./Login.css";
 
+class MissingLoginArguments extends Error {
+  constructor(...params) {
+    super(...params);
+    this.name = "Missing login arguments";
+  }
+}
+
 class LoginRejected extends Error {
   constructor(...params) {
     super(...params);
@@ -20,12 +27,8 @@ export default function LoginForm() {
     serverName: "",
     isRememberMeChecked: false,
     usernameValue: "",
-    isValidUsername: false,
     passwordValue: "",
-    isValidPassword: false,
-    showHelperText: false,
-    loginRejected: false,
-    invalidHost: false,
+    errorMessage: "",
   });
 
   const { setBasicAuth } = React.useContext(AuthContext);
@@ -47,6 +50,19 @@ export default function LoginForm() {
   };
 
   const onSubmitClick = (e) => {
+    try {
+      if (!state.serverName || !state.usernameValue || !state.passwordValue) {
+        throw new MissingLoginArguments();
+      }
+    } catch (err) {
+      if (err instanceof MissingLoginArguments) {
+        setState({
+          ...state,
+          errorMessage: "Server Name, Username, and Password are all required",
+        });
+        return;
+      }
+    }
     e.preventDefault();
     setState({ ...state, loginRejected: false, invalidHost: false });
     fetch(`https://${state.serverName}/api/users/${state.usernameValue}`, {
@@ -77,9 +93,9 @@ export default function LoginForm() {
       })
       .catch((err) => {
         if (err instanceof LoginRejected) {
-          setState({ ...state, invalidHost: false, loginRejected: true });
+          setState({ ...state, errorMessage: "Invalid Login Credentials" });
         } else {
-          setState({ ...state, loginRejected: false, invalidHost: true });
+          setState({ ...state, errorMessage: "Unable to Access Host" });
         }
         console.error(err);
       });
@@ -88,12 +104,7 @@ export default function LoginForm() {
   return (
     <form className="login-form">
       <h4>Log in to your account</h4>
-      {state.loginRejected ? (
-        <LoginError message="Error: Invalid Login Credentials" />
-      ) : null}
-      {state.invalidHost ? (
-        <LoginError message="Error: Unable to Access Host" />
-      ) : null}
+      {state.errorMessage ? <LoginError message={state.errorMessage} /> : null}
       <Label>Server Address:</Label>
       <TextInput
         id="server_address"
