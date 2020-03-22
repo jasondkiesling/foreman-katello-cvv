@@ -76,6 +76,7 @@ form.login-form .pf-c-check {
 }
 
 form.login-form > button#submit {
+  color: black;
   padding: 0.5em;
   margin: 0.5em;
   width: calc((100% - var(--input-width)) * 2);
