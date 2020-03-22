@@ -1,0 +1,15 @@
+.cv-select {
+  text-align: center;
+}
+
+.cv-select #card-button {
+  background-color: white;
+  width: 50%;
+  margin: 20px;
+}
+
+.cv-select .searchbar {
+  margin: 20px;
+  width: 50%;
+  background-color: gainsboro;
+}
