@@ -20,7 +20,7 @@ header#login-header > h3 {
   text-align: center;
 }
 
-form.login-form h4 {
+form.login-form h4#login-prompt {
   margin-top: 1em;
 }
 
@@ -90,15 +90,19 @@ form.login-form > button#submit {
 }
 
 form.login-form > div.error-invalid-login {
-  color: red;
-  text-align: center;
-  font-weight: bold;
-  display: flex;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
   align-items: center;
-  justify-content: center;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  --pf-c-alert--m-inline--BorderColor: lightgrey;
 }
 
-form.login-form > div.error-invalid-login > svg.login-error-icon {
-  height: 2em;
-  width: 2em;
+form.login-form > div.error-invalid-login > h4 {
+  font-weight: bold;
+}
+
+form.login-form > div.error-invalid-login > div.pf-c-alert__action > button {
+  padding-right: 0.5em;
 }
