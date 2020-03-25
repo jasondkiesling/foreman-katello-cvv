@@ -1,15 +1,24 @@
 import React from "react";
 
+import { Dropdown, DropdownToggle, DropdownItem } from "@patternfly/react-core";
+import { CaretDownIcon, UserIcon, KeyIcon } from "@patternfly/react-icons";
+import "@patternfly/react-core/dist/styles/base.css";
+
 import {
-  AuthContext, basicAuthCookieName, hostCookieName, usernameCookieName,
+  AuthContext,
+  basicAuthCookieName,
+  hostCookieName,
+  usernameCookieName,
 } from "./utils/AuthProvider";
 import { setCookie } from "./utils/CookieUtils";
 
+import "./App.css";
 import "./Header.css";
 
 export default function Header() {
   const { basicAuth } = React.useContext(AuthContext);
   const [user, setUser] = React.useState({ firstName: "", lastName: "" });
+  const [menuOpen, setMenuOpen] = React.useState(false);
 
   React.useEffect(() => {
     if (!basicAuth.basicAuth || !basicAuth.host || !basicAuth.username) {
@@ -20,9 +29,14 @@ export default function Header() {
       headers: {
         Authorization: `Basic ${basicAuth.basicAuth}`,
       },
-    }).then((response) => response.json()).then((jsonResponse) => {
-      setUser({ firstName: jsonResponse.firstname, lastName: jsonResponse.lastname });
-    });
+    })
+      .then((response) => response.json())
+      .then((jsonResponse) => {
+        setUser({
+          firstName: jsonResponse.firstname,
+          lastName: jsonResponse.lastname,
+        });
+      });
   }, [basicAuth]);
 
   const handleLogout = () => {
@@ -34,14 +48,41 @@ export default function Header() {
 
   return (
     <header className="page-header">
-      <img
-        src="/foreman_helmet.svg"
-        alt="Helmet"
-        className="header-logo helmet"
-      />
-      <img src="/foreman_text.png" alt="Foreman" className="header-logo text" />
-      <p>{`${user.firstName} ${user.lastName}`}</p>
-      <button type="button" onClick={handleLogout}>logout</button>
+      <a href="/">
+        <img
+          src="/foreman_helmet.svg"
+          alt="Helmet"
+          className="header-logo helmet"
+        />
+        <img
+          src="/foreman_text.png"
+          alt="Foreman"
+          className="header-logo text"
+        />
+      </a>
+      <Dropdown
+        id="header-menu"
+        toggle={
+          <DropdownToggle
+            id="header-menu-toggle"
+            onToggle={() => setMenuOpen(!menuOpen)}
+            iconComponent={CaretDownIcon}
+          >
+            <UserIcon id="header-menu-user-icon" />
+            {`${user.firstName} ${user.lastName}`}
+          </DropdownToggle>
+        }
+        isOpen={menuOpen}
+      >
+        <DropdownItem
+          key="logout"
+          className="header-menu-item"
+          onClick={handleLogout}
+        >
+          <KeyIcon id="logout-icon" />
+          Logout
+        </DropdownItem>
+      </Dropdown>
     </header>
   );
 }

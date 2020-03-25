@@ -4,7 +4,7 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  Button
+  Button,
 } from "@patternfly/react-core";
 import "@patternfly/react-core/dist/styles/base.css";
 import { AuthContext } from "../utils/AuthProvider";
@@ -23,78 +23,34 @@ export default function CVVModals({ match }) {
       {
         method: "GET",
         headers: {
-          Authorization: `Basic ${basicAuth.basicAuth}`
-        }
-      }
+          Authorization: `Basic ${basicAuth.basicAuth}`,
+        },
+      },
     )
-      .then(response => response.json())
-      .then(jsonResponse => {
+      .then((response) => response.json())
+      .then((jsonResponse) => {
         setCVVs(jsonResponse.results);
       });
   }, [basicAuth, match.params.id]);
 
   return (
     <div id="environments">
-      {cvvs.map(cvv => (
-        <div>
-          <div id="content-view" key={cvv.id}>
-            <strong>Version:&nbsp;</strong>
-            {cvv.version}
-            &nbsp;
-            <strong>Name:&nbsp;</strong>
-            {cvv.name}
-          </div>
-          <div id="drag-n-drop">
-            <strong id="NLE">No Lifecycle Environment:</strong>
-            <div className="card-container">
-              <Card isHoverable>
-                <CardHeader>Placeholder</CardHeader>
-                <CardBody>Body</CardBody>
-                <CardFooter>End</CardFooter>
-              </Card>
-              <Card isHoverable>
-                <CardHeader>Placeholder</CardHeader>
-                <CardBody>Body</CardBody>
-                <CardFooter>End</CardFooter>
-              </Card>
+      {cvvs
+        ? cvvs.map((cvv) => (
+            <div key={cvv.id}>
+              <strong>Version:&nbsp;</strong>
+              {cvv.version}
+              &nbsp;
+              <strong>Name:&nbsp;</strong>
+              {cvv.name}
             </div>
-            <strong id="Library">Library:</strong>
-            <div className="card-container">
-              {cvv.environments.map(cvv_env => (
-                <Card isHoverable>
-                  <CardHeader>{cvv_env.name}</CardHeader>
-                  <CardBody>{cvv_env.label}</CardBody>
-                  <CardFooter>End</CardFooter>
-                </Card>
-              ))}
-            </div>
-            <strong id="Testing">Testing:</strong>
-            <div className="card-container">
-              <Card isHoverable>
-                <CardHeader>Placeholder</CardHeader>
-                <CardBody>Body</CardBody>
-                <CardFooter>End</CardFooter>
-              </Card>
-            </div>
-            <strong id="Development">Development:</strong>
-            <div className="card-container">
-              <Card isHoverable>
-                <CardHeader>Placeholder</CardHeader>
-                <CardBody>Body</CardBody>
-                <CardFooter>End</CardFooter>
-              </Card>
-            </div>
-            <strong id="Production">Production:</strong>
-            <div className="card-container">
-              <Card isHoverable>
-                <CardHeader>Placeholder</CardHeader>
-                <CardBody>Body</CardBody>
-                <CardFooter>End</CardFooter>
-              </Card>
-            </div>
-          </div>
-        </div>
-      ))}
+          ))
+        : null}
+      <h3 id="NLE">No Lifecycle Environment</h3>
+      <h3 id="Library">Library</h3>
+      <h3 id="Testing">Testing</h3>
+      <h3 id="Development">Development</h3>
+      <h3 id="Production">Production</h3>
     </div>
   );
 }
