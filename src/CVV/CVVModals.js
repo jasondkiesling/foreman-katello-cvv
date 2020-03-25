@@ -38,11 +38,22 @@ export default function CVVModals({ match }) {
       {cvvs
         ? cvvs.map((cvv) => (
             <div key={cvv.id}>
-              <strong>Version:&nbsp;</strong>
-              {cvv.version}
-              &nbsp;
-              <strong>Name:&nbsp;</strong>
-              {cvv.name}
+              {cvv.environments.map((cvv_env) => (
+                <Card isHoverable>
+                  <CardHeader>
+                    <strong>Version:&nbsp;</strong>
+                    {cvv.version}
+                  </CardHeader>
+                  <CardBody>
+                    <strong>Environment:&nbsp;</strong>
+                    {`${cvv_env.name}`}
+                  </CardBody>
+                  <CardBody>
+                    <strong>Description:&nbsp;</strong>
+                    {cvv.description}
+                  </CardBody>
+                </Card>
+              ))}
             </div>
           ))
         : null}
