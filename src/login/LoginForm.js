@@ -1,27 +1,34 @@
 import React from "react";
 
-import {
-  TextInput,
-  Label,
-  Checkbox,
-  Button,
-} from "@patternfly/react-core";
+import { TextInput, Label, Checkbox, Button } from "@patternfly/react-core";
+import qs from "querystring";
 
+import LoginError from "./LoginError";
 import { AuthContext } from "../utils/AuthProvider";
 
-
 import "./Login.css";
+
+class MissingLoginArguments extends Error {
+  constructor(...params) {
+    super(...params);
+    this.name = "Missing login arguments";
+  }
+}
+
+class LoginRejected extends Error {
+  constructor(...params) {
+    super(...params);
+    this.name = "Server rejected authentication";
+  }
+}
 
 export default function LoginForm() {
   const [state, setState] = React.useState({
     serverName: "",
     isRememberMeChecked: false,
     usernameValue: "",
-    isValidUsername: false,
     passwordValue: "",
-    isValidPassword: false,
-    showHelperText: false,
-    loginRejected: false,
+    errorMessage: "",
   });
 
   const { setBasicAuth } = React.useContext(AuthContext);
@@ -43,25 +50,54 @@ export default function LoginForm() {
   };
 
   const onSubmitClick = (e) => {
+    try {
+      if (!state.serverName || !state.usernameValue || !state.passwordValue) {
+        throw new MissingLoginArguments();
+      }
+    } catch (err) {
+      if (err instanceof MissingLoginArguments) {
+        setState({
+          ...state,
+          errorMessage:
+            "Server Address, Username, and Password are all required",
+        });
+        return;
+      }
+    }
     e.preventDefault();
-    setState({ ...state, loginRejected: false });
+    setState({ ...state, errorMessage: "" });
     fetch(`https://${state.serverName}/api/users/${state.usernameValue}`, {
       method: "GET",
       headers: {
-        Authorization: `Basic ${window.btoa(`${state.usernameValue}:${state.passwordValue}`)}`,
+        Authorization: `Basic ${window.btoa(
+          `${state.usernameValue}:${state.passwordValue}`,
+        )}`,
       },
     })
       .then((response) => {
         if (!response.ok) {
-          setState({ ...state, loginRejected: true });
-          return Promise.reject("Server rejected authentication");  //eslint-disable-line
+          throw new LoginRejected();
         }
-        setBasicAuth(window.btoa(`${state.usernameValue}:${state.passwordValue}`), state.serverName, state.usernameValue, state.isRememberMeChecked ? 30 : 0);
-        window.location.assign("/");
+        setBasicAuth(
+          window.btoa(`${state.usernameValue}:${state.passwordValue}`),
+          state.serverName,
+          state.usernameValue,
+          state.isRememberMeChecked ? 30 : 0,
+        );
+        const queryStrings = qs.parse(window.location.search.slice(1));
+        if (queryStrings.redirect) {
+          window.location.assign(queryStrings.redirect);
+        } else {
+          window.location.assign("/");
+        }
         return Promise.resolve();
       })
       .catch((err) => {
-        setState({ ...state, loginRejected: true });
+        if (err instanceof LoginRejected) {
+          setState({ ...state, errorMessage: "Invalid Login Credentials" });
+        } else {
+          setState({ ...state, errorMessage: "Unable to Access Host" });
+        }
         console.error(err);
       });
   };
@@ -69,7 +105,7 @@ export default function LoginForm() {
   return (
     <form className="login-form">
       <h4>Log in to your account</h4>
-      {state.loginRejected ? <Label id="error-invalid-login">Error: Invalid Login Credentials</Label> : null}
+      {state.errorMessage ? <LoginError message={state.errorMessage} /> : null}
       <Label>Server Address:</Label>
       <TextInput
         id="server_address"
@@ -99,11 +135,7 @@ export default function LoginForm() {
           onClick={onRememberMeClick}
         />
       </div>
-      <Button
-        id="submit"
-        // type="submit"
-        onClick={onSubmitClick}
-      >
+      <Button id="submit" onClick={onSubmitClick}>
         Submit!
       </Button>
     </form>
