@@ -16,6 +16,7 @@ import "./ContentViews.css";
 
 export default function ContentViewList() {
   const [contentViews, setContentViews] = React.useState([]);
+  const [searchText, setSearchText] = React.useState("");
 
   const { basicAuth } = React.useContext(AuthContext);
 
@@ -39,7 +40,22 @@ export default function ContentViewList() {
     window.location.assign(`/content-view/${id}`);
   };
 
-  const handleOnSearchChange = () => {};
+  const handleOnSearchChange = (val) => {
+    setSearchText(val);
+
+    if (searchText === null) {
+      contentViews.map((cv) => {
+        document.getElementById(cv.name.toLowerCase()).style.display = "block";
+      });
+      return;
+    };
+
+    contentViews.map((cv) => {
+      if(!cv.name.includes(searchText)) {
+        document.getElementById(cv.name.toLowerCase()).style.display = "none";
+      }
+    });
+  };
 
   return (
     <div className="cv-select">
@@ -48,25 +64,28 @@ export default function ContentViewList() {
         className="searchbar"
         type="text"
         placeholder="Search Content Views..."
+        value = {searchText}
         onChange={handleOnSearchChange}
       />
-      {contentViews.map((cv) => (
-        <div key={cv.id}>
-          <Button id="card-button" onClick={() => handleOnClick(cv.id)}>
-            <Card isCompact>
-              <CardHeader>{cv.name}</CardHeader>
-              <CardBody>
-                <strong>Description:</strong>
-                {` ${cv.description}`}
-              </CardBody>
-              <CardFooter>
-                <strong>Version:</strong>
-                {` ${cv.latest_version}`}
-              </CardFooter>
-            </Card>
-          </Button>
-        </div>
-      ))}
+      <Card id="card-container">
+        {contentViews.map((cv) => (
+          <div key={cv.id}>
+            <Button id="card-button" onClick={() => handleOnClick(cv.id)}>
+              <Card isCompact isHoverable id={cv.name.toLowerCase()}>
+                <CardHeader>{cv.name}</CardHeader>
+                <CardBody>
+                  <strong>Description:</strong>
+                  {` ${cv.description}`}
+                </CardBody>
+                <CardFooter>
+                  <strong>Version:</strong>
+                  {` ${cv.latest_version}`}
+                </CardFooter>
+              </Card>
+            </Button>
+          </div>
+        ))}
+      </Card>
     </div>
   );
 }
