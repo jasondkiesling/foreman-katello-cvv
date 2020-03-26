@@ -21,28 +21,47 @@ export default function CVVModals({ match }) {
     )
       .then((response) => response.json())
       .then((jsonResponse) => {
-        setCVVs(jsonResponse.results);
+        const allCVVsByEnv = jsonResponse.results.reduce(
+          (cvvsByEnv, currentVal) => {
+            let envID = currentVal.environments[0]
+              ? currentVal.environments[0].id
+              : "none";
+            if (!cvvsByEnv[envID]) {
+              cvvsByEnv[envID] = [].concat(currentVal);
+              console.log(cvvsByEnv);
+            } else {
+              cvvsByEnv[envID] = cvvsByEnv[envID].concat(currentVal);
+            }
+            return cvvsByEnv;
+          },
+          {},
+        );
+        setCVVs(allCVVsByEnv);
       });
   }, [basicAuth, match.params.id]);
 
   return (
     <div id="environments">
       {cvvs
-        ? cvvs.map((cvv) => (
-            <div key={cvv.id}>
-              <strong>Version:&nbsp;</strong>
-              {cvv.version}
-              &nbsp;
-              <strong>Name:&nbsp;</strong>
-              {cvv.name}
-            </div>
-          ))
+        ? Object.keys(cvvs).map((val) => {
+            return (
+              <div key={val}>
+                Environment ID: {val}
+                {cvvs[val].map((cvv) => {
+                  return (
+                    <div key={cvv.id}>
+                      <strong>Version:&nbsp;</strong>
+                      {cvv.version}
+                      &nbsp;
+                      <strong>Name:&nbsp;</strong>
+                      {cvv.name}
+                    </div>
+                  );
+                })}{" "}
+              </div>
+            );
+          })
         : null}
-      <h3 id="NLE">No Lifecycle Environment</h3>
-      <h3 id="Library">Library</h3>
-      <h3 id="Testing">Testing</h3>
-      <h3 id="Development">Development</h3>
-      <h3 id="Production">Production</h3>
     </div>
   );
 }
