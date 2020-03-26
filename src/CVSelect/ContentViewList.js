@@ -16,7 +16,6 @@ import "./ContentViews.css";
 
 export default function ContentViewList() {
   const [contentViews, setContentViews] = React.useState([]);
-  const [searchText, setSearchText] = React.useState("");
 
   const { basicAuth } = React.useContext(AuthContext);
 
@@ -41,19 +40,16 @@ export default function ContentViewList() {
   };
 
   const handleOnSearchChange = (val) => {
-    setSearchText(val);
-
-    if (searchText === null) {
-      contentViews.map((cv) => {
+    if (val === "") {
+      contentViews.forEach((cv) => {
         document.getElementById(cv.name.toLowerCase()).style.display = "block";
       });
       return;
-    };
+    }
 
-    contentViews.map((cv) => {
-      if(!cv.name.includes(searchText)) {
-        document.getElementById(cv.name.toLowerCase()).style.display = "none";
-      }
+    contentViews.forEach((cv) => {
+      if(!cv.name.toLowerCase().includes(val)) { document.getElementById(cv.name.toLowerCase()).style.display = "none"; }
+      else { document.getElementById(cv.name.toLowerCase()).style.display = "block"; }
     });
   };
 
@@ -64,7 +60,6 @@ export default function ContentViewList() {
         className="searchbar"
         type="text"
         placeholder="Search Content Views..."
-        value = {searchText}
         onChange={handleOnSearchChange}
       />
       <Card id="card-container">
