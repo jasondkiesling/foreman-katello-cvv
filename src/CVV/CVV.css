@@ -1,14 +1,17 @@
-#content-view {
-  text-align: center;
-  padding: 20px;
-}
-
 article {
-  width: 10%;
+  width: 170px;
   text-align: center;
 }
 
-.card-container {
-  display: flex;
+#cards {
+  display: flexbox;
   flex-direction: row;
+}
+
+.env_titles {
+  font-weight: bold;
+}
+
+.pf-l-stack__item {
+  padding: 15px;
 }
