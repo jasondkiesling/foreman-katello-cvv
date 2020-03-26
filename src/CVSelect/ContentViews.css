@@ -13,3 +13,14 @@
   width: 50%;
   background-color: gainsboro;
 }
+
+.cv-select #card-container {
+  width: auto;
+  margin-right: 25%;
+  margin-left: 25%;
+  background-color: gainsboro
+}
+
+.cv-select #card-button:hover {
+  background-color: rgba(165, 215, 231, 0.493);
+}

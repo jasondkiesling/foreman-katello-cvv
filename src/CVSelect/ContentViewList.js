@@ -14,8 +14,24 @@ import { AuthContext } from "../utils/AuthProvider";
 
 import "./ContentViews.css";
 
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = React.useState("");
+  React.useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay, setDebouncedValue]);
+
+  return debouncedValue;
+}
+
 export default function ContentViewList() {
   const [contentViews, setContentViews] = React.useState([]);
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   const { basicAuth } = React.useContext(AuthContext);
 
@@ -39,7 +55,24 @@ export default function ContentViewList() {
     window.location.assign(`/content-view/${id}`);
   };
 
-  const handleOnSearchChange = () => {};
+  React.useEffect(() => {
+    if (!debouncedSearchTerm) {
+      contentViews.forEach((cv) => {
+        document.getElementById(cv.name.toLowerCase()).style.display = "block";
+      });
+      return;
+    }
+
+    contentViews.forEach((cv) => {
+      const str = cv.name.toLowerCase();
+      if(!str.includes(debouncedSearchTerm)) { document.getElementById(str).style.display = "none"; }
+      else { document.getElementById(str).style.display = "block"; }
+    });
+  }, [contentViews, debouncedSearchTerm]);
+
+  const handleOnSearchChange = (val) => {
+    setSearchTerm(val);
+  };
 
   return (
     <div className="cv-select">
@@ -50,23 +83,25 @@ export default function ContentViewList() {
         placeholder="Search Content Views..."
         onChange={handleOnSearchChange}
       />
-      {contentViews.map((cv) => (
-        <div key={cv.id}>
-          <Button id="card-button" onClick={() => handleOnClick(cv.id)}>
-            <Card isCompact>
-              <CardHeader>{cv.name}</CardHeader>
-              <CardBody>
-                <strong>Description:</strong>
-                {` ${cv.description}`}
-              </CardBody>
-              <CardFooter>
-                <strong>Version:</strong>
-                {` ${cv.latest_version}`}
-              </CardFooter>
-            </Card>
-          </Button>
-        </div>
-      ))}
+      <Card id="card-container">
+        {contentViews.map((cv) => (
+          <div key={cv.id}>
+            <Button id="card-button" onClick={() => handleOnClick(cv.id)}>
+              <Card isCompact isHoverable id={cv.name.toLowerCase()}>
+                <CardHeader>{cv.name}</CardHeader>
+                <CardBody>
+                  <strong>Description:</strong>
+                  {` ${cv.description}`}
+                </CardBody>
+                <CardFooter>
+                  <strong>Version:</strong>
+                  {` ${cv.latest_version}`}
+                </CardFooter>
+              </Card>
+            </Button>
+          </div>
+        ))}
+      </Card>
     </div>
   );
 }
