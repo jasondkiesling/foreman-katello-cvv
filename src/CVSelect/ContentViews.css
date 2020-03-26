@@ -24,3 +24,7 @@
 .cv-select #card-button:hover {
   background-color: rgba(165, 215, 231, 0.493);
 }
+
+.hidden-element {
+  display: none !important;
+}
