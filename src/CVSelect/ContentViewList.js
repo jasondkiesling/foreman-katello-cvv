@@ -56,7 +56,7 @@ export default function ContentViewList() {
   };
 
   React.useEffect(() => {
-    if (debouncedSearchTerm === "") {
+    if (!debouncedSearchTerm) {
       contentViews.forEach((cv) => {
         document.getElementById(cv.name.toLowerCase()).style.display = "block";
       });
