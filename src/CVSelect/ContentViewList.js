@@ -14,8 +14,24 @@ import { AuthContext } from "../utils/AuthProvider";
 
 import "./ContentViews.css";
 
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = React.useState("");
+  React.useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay, setDebouncedValue]);
+
+  return debouncedValue;
+}
+
 export default function ContentViewList() {
   const [contentViews, setContentViews] = React.useState([]);
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   const { basicAuth } = React.useContext(AuthContext);
 
@@ -39,8 +55,8 @@ export default function ContentViewList() {
     window.location.assign(`/content-view/${id}`);
   };
 
-  const handleOnSearchChange = (val) => {
-    if (val === "") {
+  React.useEffect(() => {
+    if (debouncedSearchTerm === "") {
       contentViews.forEach((cv) => {
         document.getElementById(cv.name.toLowerCase()).style.display = "block";
       });
@@ -48,9 +64,14 @@ export default function ContentViewList() {
     }
 
     contentViews.forEach((cv) => {
-      if(!cv.name.toLowerCase().includes(val)) { document.getElementById(cv.name.toLowerCase()).style.display = "none"; }
-      else { document.getElementById(cv.name.toLowerCase()).style.display = "block"; }
+      const str = cv.name.toLowerCase();
+      if(!str.includes(debouncedSearchTerm)) { document.getElementById(str).style.display = "none"; }
+      else { document.getElementById(str).style.display = "block"; }
     });
+  }, [contentViews, debouncedSearchTerm]);
+
+  const handleOnSearchChange = (val) => {
+    setSearchTerm(val);
   };
 
   return (
