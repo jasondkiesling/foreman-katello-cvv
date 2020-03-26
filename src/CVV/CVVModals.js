@@ -28,7 +28,6 @@ export default function CVVModals({ match }) {
               : "none";
             if (!cvvsByEnv[envID]) {
               cvvsByEnv[envID] = [].concat(currentVal);
-              console.log(cvvsByEnv);
             } else {
               cvvsByEnv[envID] = cvvsByEnv[envID].concat(currentVal);
             }
