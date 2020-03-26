@@ -36,7 +36,7 @@ export default function CVVModals({ match }) {
   return (
     <div id="environments" class="pf-l-stack">
       <div id="NLE" class="pf-l-stack__item">
-        <div class="env_titles">No Lifecycle Environment</div>
+        <div class="env_titles">No Lifecycle Environment:</div>
       </div>
       <div class="pf-l-stack__item">
         {cvvs
@@ -63,16 +63,16 @@ export default function CVVModals({ match }) {
           : null}
       </div>
       <div id="Library" class="pf-l-stack__item">
-        <div class="env_titles">Library</div>
+        <div class="env_titles">Library:</div>
       </div>
       <div id="Testing" class="pf-l-stack__item">
-        <div class="env_titles">Testing</div>
+        <div class="env_titles">Testing:</div>
       </div>
       <div id="Development" class="pf-l-stack__item">
-        <div class="env_titles">Development</div>
+        <div class="env_titles">Development:</div>
       </div>
       <div id="Production" class="pf-l-stack__item">
-        <div class="env_titles">Production</div>
+        <div class="env_titles">Production:</div>
       </div>
     </div>
   );

@@ -1,17 +1,21 @@
 article {
   width: 170px;
+  height: 150px;
   text-align: center;
+  background-color: seashell;
 }
 
 #cards {
-  display: flexbox;
-  flex-direction: row;
+  padding: 5px;
 }
 
 .env_titles {
   font-weight: bold;
+  font-size: large;
 }
 
 .pf-l-stack__item {
-  padding: 15px;
+  display: flex;
+  padding: 10px;
+  flex-direction: row;
 }
