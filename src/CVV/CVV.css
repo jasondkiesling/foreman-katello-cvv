@@ -5,8 +5,8 @@ article {
   background-color: seashell;
 }
 
-#cards {
-  padding: 5px;
+#card-button {
+  background-color: white;
 }
 
 .env_titles {
