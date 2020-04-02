@@ -1,6 +1,14 @@
 import React from "react";
-// import { Label, Button } from "@patternfly/react-core";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Button,
+} from "@patternfly/react-core";
+import "@patternfly/react-core/dist/styles/base.css";
 import { AuthContext } from "../utils/AuthProvider";
+import "./CVV.css";
 
 export default function CVVModals({ match }) {
   const { basicAuth } = React.useContext(AuthContext);
@@ -40,27 +48,71 @@ export default function CVVModals({ match }) {
   }, [basicAuth, match.params.id]);
 
   return (
-    <div id="environments">
-      {cvvs
-        ? Object.keys(cvvs).map((val) => {
-            return (
-              <div key={val}>
-                Environment ID: {val}
-                {cvvs[val].map((cvv) => {
-                  return (
-                    <div key={cvv.id}>
-                      <strong>Version:&nbsp;</strong>
-                      {cvv.version}
-                      &nbsp;
-                      <strong>Name:&nbsp;</strong>
-                      {cvv.name}
-                    </div>
-                  );
-                })}{" "}
-              </div>
-            );
-          })
-        : null}
+    <div id="environments" class="pf-l-stack">
+      <div id="NLE" class="pf-l-stack__item">
+        <div class="env_titles">No Lifecycle Environment:</div>
+      </div>
+      <div id="NLE-cards" class="pf-l-stack__item">
+        {cvvs
+          ? Object.keys(cvvs).map((val) => {
+              return (
+                <div key={val} class="cards">
+                  <Card isHoverable>
+                    Environment ID: {val}
+                    {cvvs[val].map((cvv) => {
+                      return (
+                        <div key={cvv.id}>
+                          <CardHeader>
+                            <strong>Version:&nbsp;</strong>
+                            {cvv.version}
+                            &nbsp;
+                          </CardHeader>
+                          <CardBody>
+                            <strong>Name:&nbsp;</strong>
+                            {cvv.name}
+                          </CardBody>
+                        </div>
+                      );
+                    })}{" "}
+                  </Card>
+                </div>
+              );
+            })
+          : null}
+      </div>
+      <div id="Library" class="pf-l-stack__item">
+        <div class="env_titles">Library:</div>
+      </div>
+      <div id="Lib-cards" class="pf-l-stack__item">
+        <Card isHoverable>Test</Card>
+        <Card isHoverable>Test</Card>
+        <Card isHoverable>Test</Card>
+        <Card isHoverable>Test</Card>
+        <Card isHoverable>Test</Card>
+        <Card isHoverable>Test</Card>
+        <Card isHoverable>Test</Card>
+        <Card isHoverable>Test</Card>
+        <Card isHoverable>Test</Card>
+        <Card isHoverable>Test</Card>
+      </div>
+      <div id="Testing" class="pf-l-stack__item">
+        <div class="env_titles">Testing:</div>
+      </div>
+      <div id="Test-cards" class="pf-l-stack__item">
+        <Card isHoverable>Test</Card>
+      </div>
+      <div id="Development" class="pf-l-stack__item">
+        <div class="env_titles">Development:</div>
+      </div>
+      <div id="Dev-cards" class="pf-l-stack__item">
+        <Card isHoverable>Test</Card>
+      </div>
+      <div id="Production" class="pf-l-stack__item">
+        <div class="env_titles">Production:</div>
+      </div>
+      <div id="Prod-cards" class="pf-l-stack__item">
+        <Card isHoverable>Test</Card>
+      </div>
     </div>
   );
 }
