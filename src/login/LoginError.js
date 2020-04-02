@@ -1,12 +1,17 @@
 import React from "react";
 
-import { WarningTriangleIcon } from "@patternfly/react-icons";
+import { Alert, AlertActionCloseButton } from "@patternfly/react-core";
 
-export default function LoginError({ message }) {
+export default function LoginError({ message, handleMessageClear }) {
   return (
-    <div className="error-invalid-login">
-      <WarningTriangleIcon className="login-error-icon" />
-      {message}
-    </div>
+    <Alert
+      className="error-invalid-login"
+      isInline
+      isLiveRegion
+      variant="danger"
+      title={message}
+      key={message}
+      action={<AlertActionCloseButton onClose={handleMessageClear} />}
+    />
   );
 }

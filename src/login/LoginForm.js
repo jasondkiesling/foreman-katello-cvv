@@ -49,6 +49,10 @@ export default function LoginForm() {
     setState({ ...state, serverName: val });
   };
 
+  const handleMessageClear = () => {
+    setState({ ...state, errorMessage: "" });
+  };
+
   const onSubmitClick = (e) => {
     try {
       if (!state.serverName || !state.usernameValue || !state.passwordValue) {
@@ -104,8 +108,13 @@ export default function LoginForm() {
 
   return (
     <form className="login-form">
-      <h4>Log in to your account</h4>
-      {state.errorMessage ? <LoginError message={state.errorMessage} /> : null}
+      <h4 id="login-prompt">Log in to your account</h4>
+      {state.errorMessage ? (
+        <LoginError
+          message={state.errorMessage}
+          handleMessageClear={handleMessageClear}
+        />
+      ) : null}
       <Label>Server Address:</Label>
       <TextInput
         id="server_address"

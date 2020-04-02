@@ -29,7 +29,21 @@ export default function CVVModals({ match }) {
     )
       .then((response) => response.json())
       .then((jsonResponse) => {
-        setCVVs(jsonResponse.results);
+        const allCVVsByEnv = jsonResponse.results.reduce(
+          (cvvsByEnv, currentVal) => {
+            let envID = currentVal.environments[0]
+              ? currentVal.environments[0].id
+              : "none";
+            if (!cvvsByEnv[envID]) {
+              cvvsByEnv[envID] = [].concat(currentVal);
+            } else {
+              cvvsByEnv[envID] = cvvsByEnv[envID].concat(currentVal);
+            }
+            return cvvsByEnv;
+          },
+          {},
+        );
+        setCVVs(allCVVsByEnv);
       });
   }, [basicAuth, match.params.id]);
 
