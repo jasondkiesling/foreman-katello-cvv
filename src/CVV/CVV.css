@@ -16,6 +16,6 @@ article {
 
 .pf-l-stack__item {
   display: flex;
-  padding: 10px;
+  padding: 5px;
   flex-direction: row;
 }
