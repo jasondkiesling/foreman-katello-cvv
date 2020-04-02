@@ -22,6 +22,13 @@ class LoginRejected extends Error {
   }
 }
 
+class InvalidForemanServer extends Error {
+  constructor(...params) {
+    super(...params);
+    this.name = "Server does not appear to be a Foreman server";
+  }
+}
+
 export default function LoginForm() {
   const [state, setState] = React.useState({
     serverName: "",
@@ -29,6 +36,7 @@ export default function LoginForm() {
     usernameValue: "",
     passwordValue: "",
     errorMessage: "",
+    isLoading: false,
   });
 
   const { setBasicAuth } = React.useContext(AuthContext);
@@ -82,6 +90,12 @@ export default function LoginForm() {
         if (!response.ok) {
           throw new LoginRejected();
         }
+        return response.json();
+      })
+      .then((response) => {
+        if (response.login !== state.usernameValue) {
+          throw new InvalidForemanServer();
+        }
         setBasicAuth(
           window.btoa(`${state.usernameValue}:${state.passwordValue}`),
           state.serverName,
@@ -99,6 +113,14 @@ export default function LoginForm() {
       .catch((err) => {
         if (err instanceof LoginRejected) {
           setState({ ...state, errorMessage: "Invalid Login Credentials" });
+        } else if (
+          err instanceof InvalidForemanServer ||
+          err instanceof SyntaxError
+        ) {
+          setState({
+            ...state,
+            errorMessage: "Server does not appear to be a Foreman server",
+          });
         } else {
           setState({ ...state, errorMessage: "Unable to Access Host" });
         }
