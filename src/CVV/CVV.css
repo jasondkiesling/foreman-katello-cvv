@@ -1,12 +1,9 @@
-article {
+#environments article {
   width: 170px;
   height: 150px;
   text-align: center;
-  background-color: seashell;
-}
-
-#card-button {
   background-color: white;
+  margin: 5px;
 }
 
 .env_titles {

@@ -56,7 +56,7 @@ export default function CVVModals({ match }) {
         {cvvs
           ? Object.keys(cvvs).map((val) => {
               return (
-                <div key={val}>
+                <div key={val} class="cards">
                   <Card isHoverable>
                     Environment ID: {val}
                     {cvvs[val].map((cvv) => {
