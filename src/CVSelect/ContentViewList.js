@@ -91,7 +91,7 @@ export default function ContentViewList() {
                 <CardHeader>{cv.name}</CardHeader>
                 <CardBody>
                   <strong>Description:</strong>
-                  {` ${(cv.description == null) ? `No description` : cv.description}`}
+                  {` ${(cv.description) ? cv.description : `No description`}`}
                 </CardBody>
                 <CardFooter>
                   <strong>Version:</strong>
