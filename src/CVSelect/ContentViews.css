@@ -11,7 +11,12 @@
 .cv-select .searchbar {
   margin: 20px;
   width: 50%;
-  background-color: gainsboro;
+  background-color: white;
+
+  border-width: 1px;
+  border-color: black;
+
+  padding: 10px;
 }
 
 .cv-select #card-container {
