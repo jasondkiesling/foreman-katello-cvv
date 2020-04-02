@@ -1,12 +1,18 @@
-#Modals {
-  background-color: whitesmoke;
-  height: 100vh;
+#environments article {
+  width: 170px;
+  height: 150px;
+  text-align: center;
+  background-color: white;
+  margin: 5px;
 }
 
-#environments {
-  text-align: left;
+.env_titles {
+  font-weight: bold;
+  font-size: large;
 }
 
-h3 {
-  padding: 30px;
+.pf-l-stack__item {
+  display: flex;
+  padding: 5px;
+  flex-direction: row;
 }
