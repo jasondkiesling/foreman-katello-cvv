@@ -86,8 +86,8 @@ export default function ContentViewList() {
       <Card id="card-container">
         {contentViews.map((cv) => (
           <div key={cv.id}>
-            <Button id="card-button" onClick={() => handleOnClick(cv.id)}>
-              <Card isCompact isHoverable id={cv.name.toLowerCase()}>
+            <Button className="card-button" onClick={() => handleOnClick(cv.id)} id={cv.name.toLowerCase()}>
+              <Card isCompact isHoverable>
                 <CardHeader>{cv.name}</CardHeader>
                 <CardBody>
                   <strong>Description:</strong>

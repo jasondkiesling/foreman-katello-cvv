@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.cv-select #card-button {
+.cv-select .card-button {
   background-color: white;
   width: 50%;
   margin: 20px;
@@ -26,7 +26,7 @@
   background-color: gainsboro
 }
 
-.cv-select #card-button:hover {
+.cv-select .card-button:hover {
   background-color: rgba(165, 215, 231, 0.493);
 }
 
