@@ -1,11 +1,37 @@
+/*body {
+  background-position: 0px, 0px;
+  background-image: linear-gradient(
+    to bottom,
+    #ffffff 0px,
+    #ffffff 93px,
+    #025d8c 93px,
+    white 100%
+  );
+}*/
+
 .cv-select {
   text-align: center;
 }
 
 .cv-select #card-button {
-  background-color: white;
-  width: 50%;
+  background-color: #025d8c;
+  width: 25%;
+  word-wrap: break-word;
   margin: 20px;
+  border-radius: 10px;
+}
+
+.cv-select .card {
+  color: white;
+  width: auto;
+  word-wrap: break-word;
+}
+
+.cv-select .card-footer {
+  color: white;
+  width: auto;
+  word-wrap: break-word;
+  padding-bottom: 10px;
 }
 
 .cv-select .searchbar {
@@ -18,7 +44,7 @@
   width: auto;
   margin-right: 25%;
   margin-left: 25%;
-  background-color: gainsboro
+  background-color: gainsboro;
 }
 
 .cv-select #card-button:hover {

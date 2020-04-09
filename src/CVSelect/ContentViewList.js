@@ -65,8 +65,11 @@ export default function ContentViewList() {
 
     contentViews.forEach((cv) => {
       const str = cv.name.toLowerCase();
-      if(!str.includes(debouncedSearchTerm)) { document.getElementById(str).style.display = "none"; }
-      else { document.getElementById(str).style.display = "block"; }
+      if (!str.includes(debouncedSearchTerm)) {
+        document.getElementById(str).style.display = "none";
+      } else {
+        document.getElementById(str).style.display = "block";
+      }
     });
   }, [contentViews, debouncedSearchTerm]);
 
@@ -83,25 +86,39 @@ export default function ContentViewList() {
         placeholder="Search Content Views..."
         onChange={handleOnSearchChange}
       />
-      <Card id="card-container">
-        {contentViews.map((cv) => (
-          <div key={cv.id}>
-            <Button id="card-button" onClick={() => handleOnClick(cv.id)}>
-              <Card isCompact isHoverable id={cv.name.toLowerCase()}>
-                <CardHeader>{cv.name}</CardHeader>
-                <CardBody>
-                  <strong>Description:</strong>
-                  {` ${cv.description}`}
-                </CardBody>
-                <CardFooter>
-                  <strong>Version:</strong>
-                  {` ${cv.latest_version}`}
-                </CardFooter>
-              </Card>
-            </Button>
-          </div>
-        ))}
-      </Card>
+
+      {contentViews.map((cv) => (
+        <div key={cv.id}>
+          <Button id="card-button" onClick={() => handleOnClick(cv.id)}>
+            <Card isCompact isHoverable id={cv.name.toLowerCase()}>
+              <CardHeader className="card">
+                <strong>{cv.name}</strong>
+              </CardHeader>
+              <CardBody className="card">
+                <strong>Description: </strong>
+                {` ${cv.description}`}
+              </CardBody>
+              <CardBody className="card">
+                <strong>Version Count: </strong>
+                {`${cv.version_count}`}
+              </CardBody>
+              <CardBody className="card">
+                <strong>Current Version: </strong>
+                {` ${cv.latest_version}`}
+              </CardBody>
+              <CardBody className="card">
+                <strong>Environments:</strong>
+                {`${cv.environments}`}
+              </CardBody>
+              <CardBody className="card-footer">
+                <strong>Last Updated on: </strong>
+                {`${cv.updated_at}`}
+                {/*This prints out in UTC time, maybe dont include this or find a way to convert to local time and make pretty*/}
+              </CardBody>
+            </Card>
+          </Button>
+        </div>
+      ))}
     </div>
   );
 }
