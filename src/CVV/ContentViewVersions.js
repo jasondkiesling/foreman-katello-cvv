@@ -3,14 +3,14 @@ import Header from "../Header";
 // import logo from "./logo.svg";
 import "./CVV.css";
 import AuthProvider from "../utils/AuthProvider";
-import CVVModals from "./CVVModals";
+import CVVDisplay from "./CVVDisplay";
 
 export default function ContentViewVersions({ match }) {
   return (
     <AuthProvider>
       <div id="Modals">
         <Header />
-        <CVVModals match={match} />
+        <CVVDisplay match={match} />
       </div>
     </AuthProvider>
   );
