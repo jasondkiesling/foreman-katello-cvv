@@ -58,15 +58,15 @@ export default function ContentViewList() {
   React.useEffect(() => {
     if (!debouncedSearchTerm) {
       contentViews.forEach((cv) => {
-        document.getElementById(cv.name.toLowerCase()).style.display = "block";
+        document.getElementById(cv.name.toLowerCase()).classList.remove("hidden-element");
       });
       return;
     }
 
     contentViews.forEach((cv) => {
       const str = cv.name.toLowerCase();
-      if(!str.includes(debouncedSearchTerm)) { document.getElementById(str).style.display = "none"; }
-      else { document.getElementById(str).style.display = "block"; }
+      if(!str.includes(debouncedSearchTerm)) { document.getElementById(str).classList.add("hidden-element"); }
+      else { document.getElementById(str).classList.remove("hidden-element"); }
     });
   }, [contentViews, debouncedSearchTerm]);
 
@@ -86,12 +86,12 @@ export default function ContentViewList() {
       <Card id="card-container">
         {contentViews.map((cv) => (
           <div key={cv.id}>
-            <Button id="card-button" onClick={() => handleOnClick(cv.id)}>
-              <Card isCompact isHoverable id={cv.name.toLowerCase()}>
+            <Button className="card-button" onClick={() => handleOnClick(cv.id)} id={cv.name.toLowerCase()}>
+              <Card isCompact isHoverable>
                 <CardHeader>{cv.name}</CardHeader>
                 <CardBody>
                   <strong>Description:</strong>
-                  {` ${cv.description}`}
+                  {` ${(cv.description) ? cv.description : `No description`}`}
                 </CardBody>
                 <CardFooter>
                   <strong>Version:</strong>
