@@ -48,15 +48,15 @@ export default function CVVModals({ match }) {
   }, [basicAuth, match.params.id]);
 
   return (
-    <div id="environments" class="pf-l-stack">
-      <div id="NLE" class="pf-l-stack__item">
-        <div class="env_titles">No Lifecycle Environment:</div>
+    <div id="environments" className="pf-l-stack">
+      <div id="NLE" className="pf-l-stack__item">
+        <div className="env_titles">No Lifecycle Environment:</div>
       </div>
-      <div id="NLE-cards" class="pf-l-stack__item">
+      <div id="NLE-cards" className="pf-l-stack__item">
         {cvvs
           ? Object.keys(cvvs).map((val) => {
               return (
-                <div key={val} class="cards">
+                <div key={val} className="cards">
                   <Card isHoverable>
                     Environment ID: {val}
                     {cvvs[val].map((cvv) => {
@@ -80,10 +80,10 @@ export default function CVVModals({ match }) {
             })
           : null}
       </div>
-      <div id="Library" class="pf-l-stack__item">
-        <div class="env_titles">Library:</div>
+      <div id="Library" className="pf-l-stack__item">
+        <div className="env_titles">Library:</div>
       </div>
-      <div id="Lib-cards" class="pf-l-stack__item">
+      <div id="Lib-cards" className="pf-l-stack__item">
         <Card isHoverable>Test</Card>
         <Card isHoverable>Test</Card>
         <Card isHoverable>Test</Card>
@@ -94,23 +94,33 @@ export default function CVVModals({ match }) {
         <Card isHoverable>Test</Card>
         <Card isHoverable>Test</Card>
         <Card isHoverable>Test</Card>
-      </div>
-      <div id="Testing" class="pf-l-stack__item">
-        <div class="env_titles">Testing:</div>
-      </div>
-      <div id="Test-cards" class="pf-l-stack__item">
         <Card isHoverable>Test</Card>
-      </div>
-      <div id="Development" class="pf-l-stack__item">
-        <div class="env_titles">Development:</div>
-      </div>
-      <div id="Dev-cards" class="pf-l-stack__item">
+        <Card isHoverable>Test</Card>
+        <Card isHoverable>Test</Card>
+        <Card isHoverable>Test</Card>
+        <Card isHoverable>Test</Card>
+        <Card isHoverable>Test</Card>
+        <Card isHoverable>Test</Card>
+        <Card isHoverable>Test</Card>
+        <Card isHoverable>Test</Card>
         <Card isHoverable>Test</Card>
       </div>
-      <div id="Production" class="pf-l-stack__item">
-        <div class="env_titles">Production:</div>
+      <div id="Testing" className="pf-l-stack__item">
+        <div className="env_titles">Testing:</div>
       </div>
-      <div id="Prod-cards" class="pf-l-stack__item">
+      <div id="Test-cards" className="pf-l-stack__item">
+        <Card isHoverable>Test</Card>
+      </div>
+      <div id="Development" className="pf-l-stack__item">
+        <div className="env_titles">Development:</div>
+      </div>
+      <div id="Dev-cards" className="pf-l-stack__item">
+        <Card isHoverable>Test</Card>
+      </div>
+      <div id="Production" className="pf-l-stack__item">
+        <div className="env_titles">Production:</div>
+      </div>
+      <div id="Prod-cards" className="pf-l-stack__item">
         <Card isHoverable>Test</Card>
       </div>
     </div>

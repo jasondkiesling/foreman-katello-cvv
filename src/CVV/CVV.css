@@ -6,6 +6,11 @@
   margin: 5px;
 }
 
+#Lib-cards {
+  width: 200%;
+  overflow-x: auto;
+}
+
 .env_titles {
   font-weight: bold;
   font-size: large;
