@@ -59,8 +59,8 @@ export default function CVVDisplay({ match }) {
   return (
     <div id="environments" className="pf-l-stack">
       <div id="NLE" className="pf-l-stack__item">
-        <div className="env_titles">No Lifecycle Environment</div>
-        <div className="pf-l-stack__item cvv_button_row">
+        <div className="env-titles">No Lifecycle Environment</div>
+        <div className="pf-l-stack__item cvv-button-row">
           {cvvs["none"]
             ? cvvs["none"].map((cvv) => {
                 return <CVVButton key={cvv.id} cvv={cvv} />;
@@ -72,8 +72,8 @@ export default function CVVDisplay({ match }) {
         ? cvvEnv.map((env) => {
             return (
               <div className="pf-l-stack__item ">
-                <div className="env_titles">{env.name}</div>
-                <div className="cvv_button_row">
+                <div className="env-titles">{env.name}</div>
+                <div className="cvv-button-row">
                   {cvvs[env.id]
                     ? cvvs[env.id].map((cvv) => {
                         return <CVVButton key={cvv.id} cvv={cvv} />;
@@ -84,7 +84,6 @@ export default function CVVDisplay({ match }) {
             );
           })
         : null}
-      <div id="NLE-cards" className="pf-l-stack__item"></div>
     </div>
   );
 }
