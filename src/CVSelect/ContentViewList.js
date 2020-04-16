@@ -58,7 +58,9 @@ export default function ContentViewList() {
   React.useEffect(() => {
     if (!debouncedSearchTerm) {
       contentViews.forEach((cv) => {
-        document.getElementById(cv.name.toLowerCase()).style.display = "block";
+        document
+          .getElementById(cv.name.toLowerCase())
+          .classList.remove("hidden-element");
       });
       return;
     }
@@ -66,9 +68,9 @@ export default function ContentViewList() {
     contentViews.forEach((cv) => {
       const str = cv.name.toLowerCase();
       if (!str.includes(debouncedSearchTerm)) {
-        document.getElementById(str).style.display = "none";
+        document.getElementById(str).classList.add("hidden-element");
       } else {
-        document.getElementById(str).style.display = "block";
+        document.getElementById(str).classList.remove("hidden-element");
       }
     });
   }, [contentViews, debouncedSearchTerm]);

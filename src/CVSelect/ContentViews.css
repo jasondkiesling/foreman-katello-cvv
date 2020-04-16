@@ -55,7 +55,12 @@
 .cv-select .searchbar {
   margin: 20px;
   width: 50%;
-  background-color: gainsboro;
+  background-color: white;
+
+  border-width: 1px;
+  border-color: black;
+
+  padding: 10px;
 }
 
 .cv-select #card-container {
@@ -65,8 +70,12 @@
   background-color: gainsboro;
 }
 
-.cv-select #card-button:hover {
+.cv-select .card-button:hover {
   background-color: rgba(165, 215, 231, 0.493);
   background-color: lightslategray;
   /*background-color: rgb(200, 200, 0);*/
+}
+
+.hidden-element {
+  display: none !important;
 }
