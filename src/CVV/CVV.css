@@ -16,8 +16,8 @@
   font-size: large;
 }
 
-.pf-l-stack__item {
+.cvv_button_row {
   display: flex;
-  padding: 5px;
   flex-direction: row;
+  padding-bottom: 1.5em;
 }
