@@ -8,13 +8,14 @@ import "./CVV.css";
 export default function CVVDisplay({ match }) {
   const { basicAuth } = React.useContext(AuthContext);
   const [cvvs, setCVVs] = React.useState([]);
+  const [cvvEnv, setCvvEnv] = React.useState([]);
 
   React.useEffect(() => {
     if (!basicAuth.basicAuth || !basicAuth.host) {
       return;
     }
     fetch(
-      `https://${basicAuth.host}/katello/api/content_views/${match.params.id}/content_view_versions`,
+      `https://${basicAuth.host}/katello/api/content_views/${match.params.id}/content_view_versions/`,
       {
         method: "GET",
         headers: {
@@ -40,90 +41,50 @@ export default function CVVDisplay({ match }) {
         );
         setCVVs(allCVVsByEnv);
       });
+    fetch(
+      `https://${basicAuth.host}/katello/api/content_views/${match.params.id}/`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Basic ${basicAuth.basicAuth}`,
+        },
+      },
+    )
+      .then((response) => response.json())
+      .then((jsonResults) => {
+        setCvvEnv(jsonResults.environments);
+      });
   }, [basicAuth, match.params.id]);
 
   return (
     <div id="environments" className="pf-l-stack">
       <div id="NLE" className="pf-l-stack__item">
-        <div className="env_titles">No Lifecycle Environment:</div>
+        <div className="env_titles">No Lifecycle Environment</div>
+        <div className="pf-l-stack__item cvv_button_row">
+          {cvvs["none"]
+            ? cvvs["none"].map((cvv) => {
+                return <CVVButton key={cvv.id} cvv={cvv} />;
+              })
+            : null}
+        </div>
       </div>
-      <div id="NLE-cards" className="pf-l-stack__item">
-        {cvvs
-          ? Object.keys(cvvs).map((val) => {
-              return (
-                <div key={val} className="cards">
-                  {cvvs["none"].map((cvv) => {
-                    return <CVVButton key={cvv.id} cvv={cvv} />;
-                  })}
+      {cvvEnv
+        ? cvvEnv.map((env) => {
+            return (
+              <div className="pf-l-stack__item ">
+                <div className="env_titles">{env.name}</div>
+                <div className="cvv_button_row">
+                  {cvvs[env.id]
+                    ? cvvs[env.id].map((cvv) => {
+                        return <CVVButton key={cvv.id} cvv={cvv} />;
+                      })
+                    : null}
                 </div>
-              );
-            })
-          : null}
-      </div>
-      <div id="Library" className="pf-l-stack__item">
-        <div className="env_titles">Library:</div>
-      </div>
-      <div id="Lib-cards" className="pf-l-stack__item">
-        {cvvs
-          ? Object.keys(cvvs).map((val) => {
-              return (
-                <div key={val} className="cards">
-                  {cvvs[1].map((cvv) => {
-                    return <CVVButton key={cvv.id} cvv={cvv} />;
-                  })}
-                </div>
-              );
-            })
-          : null}
-      </div>
-      <div id="Testing" className="pf-l-stack__item">
-        <div className="env_titles">Testing:</div>
-      </div>
-      <div id="Test-cards" className="pf-l-stack__item">
-        {cvvs
-          ? Object.keys(cvvs).map((val) => {
-              return (
-                <div key={val} className="cards">
-                  {cvvs[1].map((cvv) => {
-                    return <CVVButton key={cvv.id} cvv={cvv} />;
-                  })}
-                </div>
-              );
-            })
-          : null}
-      </div>
-      <div id="Development" className="pf-l-stack__item">
-        <div className="env_titles">Development:</div>
-      </div>
-      <div id="Dev-cards" className="pf-l-stack__item">
-        {cvvs
-          ? Object.keys(cvvs).map((val) => {
-              return (
-                <div key={val} className="cards">
-                  {cvvs[2].map((cvv) => {
-                    return <CVVButton key={cvv.id} cvv={cvv} />;
-                  })}
-                </div>
-              );
-            })
-          : null}
-      </div>
-      <div id="Production" className="pf-l-stack__item">
-        <div className="env_titles">Production:</div>
-      </div>
-      <div id="Prod-cards" className="pf-l-stack__item">
-        {cvvs
-          ? Object.keys(cvvs).map((val) => {
-              return (
-                <div key={val} className="cards">
-                  {cvvs[3].map((cvv) => {
-                    return <CVVButton key={cvv.id} cvv={cvv} />;
-                  })}
-                </div>
-              );
-            })
-          : null}
-      </div>
+              </div>
+            );
+          })
+        : null}
+      <div id="NLE-cards" className="pf-l-stack__item"></div>
     </div>
   );
 }
