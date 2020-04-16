@@ -6,17 +6,12 @@
   margin: 5px;
 }
 
-#Lib-cards {
-  width: 200%;
-  overflow-x: auto;
-}
-
-.env_titles {
+.env-titles {
   font-weight: bold;
   font-size: large;
 }
 
-.cvv_button_row {
+.cvv-button-row {
   display: flex;
   flex-direction: row;
   padding-bottom: 1.5em;
