@@ -1,6 +1,8 @@
 #environments article {
   width: 170px;
   height: 150px;
+  overflow: hidden;
+  padding: 0.5em;
   text-align: center;
   background-color: white;
   margin: 5px;
@@ -9,10 +11,11 @@
 .env-titles {
   font-weight: bold;
   font-size: large;
+  padding-top: 0.5em;
 }
 
 .cvv-button-row {
   display: flex;
   flex-direction: row;
-  padding-bottom: 1.5em;
+  padding-bottom: 1em;
 }
