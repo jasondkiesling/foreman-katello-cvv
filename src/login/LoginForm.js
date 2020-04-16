@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TextInput, Label, Checkbox, Button } from "@patternfly/react-core";
+import { TextInput, Label, Button } from "@patternfly/react-core";
 import qs from "querystring";
 
 import LoginError from "./LoginError";
@@ -32,18 +32,23 @@ class InvalidForemanServer extends Error {
 export default function LoginForm() {
   const [state, setState] = React.useState({
     serverName: "",
-    isRememberMeChecked: false,
     usernameValue: "",
     passwordValue: "",
     errorMessage: "",
     isLoading: false,
   });
 
-  const { setBasicAuth } = React.useContext(AuthContext);
+  React.useEffect(() => {
+    const queryStrings = qs.parse(window.location.search.slice(1));
+    if (queryStrings.error === "401") {
+      setState({
+        ...state,
+        errorMessage: "Your server rejected our request. Please login again.",
+      });
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const onRememberMeClick = () => {
-    setState({ ...state, isRememberMeChecked: !state.isRememberMeChecked });
-  };
+  const { setBasicAuth } = React.useContext(AuthContext);
 
   const handleUsernameChange = (val) => {
     setState({ ...state, usernameValue: val });
@@ -100,7 +105,6 @@ export default function LoginForm() {
           window.btoa(`${state.usernameValue}:${state.passwordValue}`),
           state.serverName,
           state.usernameValue,
-          state.isRememberMeChecked ? 30 : 0,
         );
         const queryStrings = qs.parse(window.location.search.slice(1));
         if (queryStrings.redirect) {
@@ -158,14 +162,6 @@ export default function LoginForm() {
         value={state.passwordValue}
         onChange={handlePasswordChange}
       />
-      <div className="remember_box">
-        <Label>Remember Me?</Label>
-        <Checkbox
-          id="remember_me"
-          value={state.isRememberMeChecked}
-          onClick={onRememberMeClick}
-        />
-      </div>
       <Button id="submit" onClick={onSubmitClick}>
         Submit!
       </Button>
