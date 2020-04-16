@@ -91,30 +91,60 @@ export default function ContentViewList() {
         <div key={cv.id}>
           <Button id="card-button" onClick={() => handleOnClick(cv.id)}>
             <Card isCompact isHoverable id={cv.name.toLowerCase()}>
-              <CardHeader className="card">
+              <CardHeader className="card-header">
                 <strong>{cv.name}</strong>
               </CardHeader>
-              <CardBody className="card">
-                <strong>Description: </strong>
-                {` ${cv.description}`}
+              <CardBody>
+                <div className="card-body">
+                  <div className="column">
+                    <p>
+                      <strong>Description: </strong>
+                      <br></br>
+                      {` ${cv.description}`}
+                    </p>
+                  </div>
+                  &nbsp;
+                  <div className="column">
+                    <p>
+                      <strong>Organization: </strong>
+                      <br></br>
+                      {`${cv.organization.name}`}
+                    </p>
+                  </div>
+                  &nbsp;
+                  <div className="column">
+                    <p>
+                      <strong>Version Count: </strong>
+                      <br></br>
+                      {`${cv.version_count}`}
+                    </p>
+                  </div>
+                  &nbsp;
+                  <div className="column">
+                    <p>
+                      <strong>Current Version: </strong>
+                      <br></br>
+                      {` ${cv.latest_version}`}
+                    </p>
+                  </div>
+                  &nbsp;
+                  <div className="column">
+                    <p>
+                      <strong>Environments: </strong>
+                      <br></br>
+                      {cv.environments.map((cv_env) => (
+                        <p>{`${cv_env.name}`}</p>
+                      ))}
+                    </p>
+                  </div>
+                </div>
               </CardBody>
-              <CardBody className="card">
-                <strong>Version Count: </strong>
-                {`${cv.version_count}`}
-              </CardBody>
-              <CardBody className="card">
-                <strong>Current Version: </strong>
-                {` ${cv.latest_version}`}
-              </CardBody>
-              <CardBody className="card">
-                <strong>Environments:</strong>
-                {`${cv.environments}`}
-              </CardBody>
-              <CardBody className="card-footer">
+
+              <CardFooter className="card-footer">
                 <strong>Last Updated on: </strong>
                 {`${cv.updated_at}`}
                 {/*This prints out in UTC time, maybe dont include this or find a way to convert to local time and make pretty*/}
-              </CardBody>
+              </CardFooter>
             </Card>
           </Button>
         </div>

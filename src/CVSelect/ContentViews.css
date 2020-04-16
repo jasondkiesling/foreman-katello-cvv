@@ -15,16 +15,34 @@
 
 .cv-select #card-button {
   background-color: #025d8c;
-  width: 25%;
+  width: 60%;
   word-wrap: break-word;
   margin: 20px;
   border-radius: 10px;
 }
 
-.cv-select .card {
+.cv-select .card-header {
   color: white;
   width: auto;
   word-wrap: break-word;
+}
+
+.cv-select .card-body {
+  color: white;
+  width: auto;
+}
+
+.cv-select .card-body:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.cv-select .column {
+  float: left;
+  width: auto;
+  padding-left: 10%;
+  height: auto;
 }
 
 .cv-select .card-footer {
@@ -49,4 +67,6 @@
 
 .cv-select #card-button:hover {
   background-color: rgba(165, 215, 231, 0.493);
+  background-color: lightslategray;
+  /*background-color: rgb(200, 200, 0);*/
 }
