@@ -30,6 +30,8 @@
 .cv-select .card-body {
   color: white;
   width: auto;
+  display: flex;
+  flex-direction: row;
 }
 
 .cv-select .description {
@@ -51,10 +53,7 @@
 
 .cv-select .column {
   text-align: center;
-  float: left;
-  width: auto;
-  margin-left: 5%;
-  margin-right: 5%;
+  width: 20%;
   max-height: 4em;
   overflow-y: hidden;
   text-overflow: ellipsis;
