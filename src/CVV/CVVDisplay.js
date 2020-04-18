@@ -75,7 +75,7 @@ export default function CVVDisplay({ match }) {
     <div id="environments" className="pf-l-stack">
       <div id="NLE" className="pf-l-stack__item">
         <div className="env-titles">No Lifecycle Environment</div>
-        <div className="pf-l-stack__item cvv-button-row">
+        <div className="pf-l-stack__item cvv-button-row-wrap">
           {cvvs["none"]
             ? cvvs["none"].map((cvv) => {
                 return <CVVButton key={cvv.id} cvv={cvv} />;
