@@ -32,6 +32,17 @@
   width: auto;
 }
 
+.cv-select .description {
+  margin-left: 5%;
+  text-align: left;
+  max-width: 90%;
+  line-height: 1em;
+  max-height: 2em;
+  overflow: hidden;
+  white-space: pre;
+  text-overflow: ellipsis;
+}
+
 .cv-select .card-body:after {
   content: "";
   display: table;
@@ -39,10 +50,14 @@
 }
 
 .cv-select .column {
+  text-align: center;
   float: left;
   width: auto;
-  padding-left: 10%;
-  height: auto;
+  margin-left: 5%;
+  margin-right: 5%;
+  max-height: 4em;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
 }
 
 .cv-select .card-footer {

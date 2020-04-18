@@ -95,25 +95,11 @@ export default function ContentViewList() {
             <Card isCompact isHoverable id={cv.name.toLowerCase()}>
               <CardHeader className="card-header">
                 <strong>{cv.name}</strong>
+                <br></br>
+                <div className="description">{` ${cv.description}`}</div>
               </CardHeader>
               <CardBody>
                 <div className="card-body">
-                  <div className="column">
-                    <p>
-                      <strong>Description: </strong>
-                      <br></br>
-                      {` ${cv.description}`}
-                    </p>
-                  </div>
-                  &nbsp;
-                  <div className="column">
-                    <p>
-                      <strong>Organization: </strong>
-                      <br></br>
-                      {`${cv.organization.name}`}
-                    </p>
-                  </div>
-                  &nbsp;
                   <div className="column">
                     <p>
                       <strong>Version Count: </strong>
@@ -132,11 +118,29 @@ export default function ContentViewList() {
                   &nbsp;
                   <div className="column">
                     <p>
+                      <strong>Repositories: </strong>
+                      <br></br>
+                      {cv.repositories.map((cv_repo) => (
+                        <p>{`${cv_repo.name}`}</p>
+                      ))}
+                    </p>
+                  </div>
+                  &nbsp;
+                  <div className="column">
+                    <p>
                       <strong>Environments: </strong>
                       <br></br>
                       {cv.environments.map((cv_env) => (
                         <p>{`${cv_env.name}`}</p>
                       ))}
+                    </p>
+                  </div>
+                  &nbsp;
+                  <div className="column">
+                    <p>
+                      <strong>Organization: </strong>
+                      <br></br>
+                      {`${cv.organization.name}`}
                     </p>
                   </div>
                 </div>
