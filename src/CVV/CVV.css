@@ -14,8 +14,9 @@
   padding-top: 0.5em;
 }
 
-.cvv-button-row {
+.cvv-button-row-wrap {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   padding-bottom: 1em;
 }
