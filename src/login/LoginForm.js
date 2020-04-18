@@ -50,12 +50,6 @@ export default function LoginForm() {
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  React.useEffect(() => {
-    if (enterPressed) {
-      onSubmitClick();
-    }
-  }, [enterPressed, onSubmitClick]);
-
   const { setBasicAuth } = React.useContext(AuthContext);
 
   const handleUsernameChange = (val) => {
@@ -141,6 +135,12 @@ export default function LoginForm() {
         console.error(err);
       });
   };
+
+  React.useEffect(() => {
+    if (enterPressed) {
+      onSubmitClick();
+    }
+  }, [enterPressed, onSubmitClick]);
 
   return (
     <form className="login-form">
