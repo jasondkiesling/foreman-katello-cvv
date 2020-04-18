@@ -5,6 +5,7 @@ import qs from "querystring";
 
 import LoginError from "./LoginError";
 import { AuthContext } from "../utils/AuthProvider";
+import useKeyPress from "../utils/useKeyPress";
 
 import "./Login.css";
 
@@ -37,6 +38,7 @@ export default function LoginForm() {
     errorMessage: "",
     isLoading: false,
   });
+  const enterPressed = useKeyPress("Enter");
 
   React.useEffect(() => {
     const queryStrings = qs.parse(window.location.search.slice(1));
@@ -47,6 +49,12 @@ export default function LoginForm() {
       });
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  React.useEffect(() => {
+    if (enterPressed) {
+      onSubmitClick();
+    }
+  }, [enterPressed, onSubmitClick]);
 
   const { setBasicAuth } = React.useContext(AuthContext);
 
@@ -81,7 +89,9 @@ export default function LoginForm() {
         return;
       }
     }
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     setState({ ...state, errorMessage: "" });
     fetch(`https://${state.serverName}/api/users/${state.usernameValue}`, {
       method: "GET",
