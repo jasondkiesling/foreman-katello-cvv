@@ -27,11 +27,9 @@ export default function CVVModal({ title, open, onClose, cvvID }) {
   }, [cvvID, basicAuth]);
 
   return (
-    <Modal title={title} isOpen={open} onClose={onClose}>
-      {`Version: ${cvvInfo.version}`}
-      <br />
-      {cvvInfo.description ? `${cvvInfo.description}` : null}
-      <br />
+    <Modal className="cvv-modal" title={title} isOpen={open} onClose={onClose}>
+      {cvvInfo.description ? `${cvvInfo.description}` : `No description.`}
+      <br /> <br />
       {`Packages:\t${cvvInfo.package_count}`}
       <br />
       {`Files:\t\t${cvvInfo.file_count}`}

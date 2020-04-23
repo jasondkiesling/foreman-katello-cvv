@@ -40,6 +40,11 @@
   text-overflow: ellipsis;
 }
 
+.cvv-modal {
+  width: 35%;
+  padding: 5px;
+}
+
 .pf-c-button.pf-m-primary {
   background-color: white;
 }
