@@ -6,14 +6,20 @@ import "@patternfly/react-core/dist/styles/base.css";
 
 import {
   AuthContext,
-  basicAuthCookieName,
-  hostCookieName,
-  usernameCookieName,
+  basicAuthStorageKey,
+  hostStorageKey,
+  usernameStorageKey,
 } from "./utils/AuthProvider";
-import { setCookie } from "./utils/CookieUtils";
 
 import "./App.css";
 import "./Header.css";
+
+class FetchRejected extends Error {
+  constructor(...params) {
+    super(...params);
+    this.name = "Server rejected API call";
+  }
+}
 
 export default function Header() {
   const { basicAuth } = React.useContext(AuthContext);
@@ -30,20 +36,36 @@ export default function Header() {
         Authorization: `Basic ${basicAuth.basicAuth}`,
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new FetchRejected();
+        }
+        return response.json();
+      })
       .then((jsonResponse) => {
         setUser({
           firstName: jsonResponse.firstname,
           lastName: jsonResponse.lastname,
         });
+      })
+      .catch((err) => {
+        console.error(err);
+        if (err instanceof FetchRejected) {
+          handleLogout(false);
+          window.location.assign(
+            `/login?redirect=${window.location.pathname}&error=401`,
+          );
+        }
       });
   }, [basicAuth]);
 
-  const handleLogout = () => {
-    setCookie(basicAuthCookieName, "", -1);
-    setCookie(usernameCookieName, "", -1);
-    setCookie(hostCookieName, "", -1);
-    window.location.assign("/login");
+  const handleLogout = (redirect = true) => {
+    localStorage.removeItem(basicAuthStorageKey);
+    localStorage.removeItem(usernameStorageKey);
+    localStorage.removeItem(hostStorageKey);
+    if (redirect) {
+      window.location.assign("/login");
+    }
   };
 
   return (

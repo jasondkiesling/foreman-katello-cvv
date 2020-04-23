@@ -41,6 +41,7 @@ export default function CVVDisplay({ match }) {
         );
         setCVVs(allCVVsByEnv);
       });
+
     fetch(
       `https://${basicAuth.host}/katello/api/content_views/${match.params.id}/`,
       {
@@ -52,7 +53,21 @@ export default function CVVDisplay({ match }) {
     )
       .then((response) => response.json())
       .then((jsonResults) => {
-        setCvvEnv(jsonResults.environments);
+        console.log(jsonResults.organization_id);
+        fetch(
+          `https://${basicAuth.host}/katello/api/organizations/${jsonResults.organization_id}/environments?full_result=true`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Basic ${basicAuth.basicAuth}`,
+            },
+          },
+        )
+          .then((response) => response.json())
+          .then((jsonResults) => {
+            console.log(jsonResults);
+            setCvvEnv(jsonResults.results);
+          });
       });
   }, [basicAuth, match.params.id]);
 
@@ -71,7 +86,7 @@ export default function CVVDisplay({ match }) {
       {cvvEnv
         ? cvvEnv.map((env) => {
             return (
-              <div className="pf-l-stack__item ">
+              <div className="pf-l-stack__item " key={env.id}>
                 <div className="env-titles">{env.name}</div>
                 <div className="cvv-button-row">
                   {cvvs[env.id]
