@@ -27,13 +27,22 @@ export default function CVVDisplay({ match }) {
       .then((jsonResponse) => {
         const allCVVsByEnv = jsonResponse.results.reduce(
           (cvvsByEnv, currentVal) => {
-            let envID = currentVal.environments[0]
-              ? currentVal.environments[0].id
-              : "none";
-            if (!cvvsByEnv[envID]) {
-              cvvsByEnv[envID] = [].concat(currentVal);
+            if (currentVal.environments.length) {
+              currentVal.environments.forEach((env) => {
+                let envID = env.id;
+                if (!cvvsByEnv[envID]) {
+                  cvvsByEnv[envID] = [].concat(currentVal);
+                } else {
+                  cvvsByEnv[envID] = cvvsByEnv[envID].concat(currentVal);
+                }
+              });
             } else {
-              cvvsByEnv[envID] = cvvsByEnv[envID].concat(currentVal);
+              let envID = "none";
+              if (!cvvsByEnv[envID]) {
+                cvvsByEnv[envID] = [].concat(currentVal);
+              } else {
+                cvvsByEnv[envID] = cvvsByEnv[envID].concat(currentVal);
+              }
             }
             return cvvsByEnv;
           },
