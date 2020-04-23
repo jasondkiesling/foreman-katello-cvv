@@ -1,7 +1,13 @@
 import React from "react";
 
 import CVVModal from "./CVVModal";
-import { Button, Card, CardHeader, CardFooter } from "@patternfly/react-core";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardFooter,
+  CardBody,
+} from "@patternfly/react-core";
 
 export default function CVVButton({ cvv }) {
   const [open, setOpen] = React.useState(false);
@@ -15,13 +21,16 @@ export default function CVVButton({ cvv }) {
       <Button onClick={handleOnClick}>
         <Card isHoverable>
           <CardHeader>
-            <strong>Name:&nbsp;</strong>
-            {cvv.name}
+            <strong className="env-name">{cvv.name}</strong>
+            <div>
+              <strong className="version">Version:&nbsp;</strong>
+              {cvv.version}
+            </div>
           </CardHeader>
-          <CardFooter>
-            <strong>Version:&nbsp;</strong>
-            {cvv.version}
-          </CardFooter>
+          <CardBody>
+            <div className="cvv-descrip">{cvv.description}</div>
+          </CardBody>
+          <CardFooter></CardFooter>
         </Card>
       </Button>
       <CVVModal

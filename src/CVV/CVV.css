@@ -20,3 +20,13 @@
   flex-wrap: wrap;
   padding-bottom: 1em;
 }
+
+.env-name {
+  font-size: x-large;
+}
+
+.cvv-descrip {
+  font-size: small;
+  overflow: hidden;
+  text-align: center;
+}
