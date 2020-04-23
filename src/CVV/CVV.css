@@ -39,3 +39,7 @@
   text-align: center;
   text-overflow: ellipsis;
 }
+
+.pf-c-button.pf-m-primary {
+  background-color: white;
+}
