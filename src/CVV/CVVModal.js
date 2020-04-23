@@ -10,21 +10,22 @@ export default function CVVModal({ title, open, onClose, cvvID }) {
     if (!basicAuth.basicAuth || !basicAuth.host) {
       return;
     }
-
-    fetch(
-      `https://${basicAuth.host}/katello/api/content_view_versions/${cvvID}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Basic ${basicAuth.basicAuth}`,
+    if (open) {
+      fetch(
+        `https://${basicAuth.host}/katello/api/content_view_versions/${cvvID}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Basic ${basicAuth.basicAuth}`,
+          },
         },
-      },
-    )
-      .then((response) => response.json())
-      .then((arrayResponse) => {
-        setCVVInfo(arrayResponse);
-      });
-  }, [cvvID, basicAuth]);
+      )
+        .then((response) => response.json())
+        .then((arrayResponse) => {
+          setCVVInfo(arrayResponse);
+        });
+    }
+  }, [cvvID, basicAuth, open]);
 
   return (
     <Modal title={title} isOpen={open} onClose={onClose}>
