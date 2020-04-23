@@ -96,10 +96,18 @@ export default function ContentViewList() {
               <CardHeader className="card-header">
                 <strong>{cv.name}</strong>
                 <br></br>
-                <div className="description">{` ${cv.description}`}</div>
+                <div className="description">{cv.description}</div>
               </CardHeader>
               <CardBody>
                 <div className="card-body">
+                  <div className="column">
+                    <p>
+                      <strong>Organization: </strong>
+                      <br></br>
+                      {`${cv.organization.name}`}
+                    </p>
+                  </div>
+                  &nbsp;
                   <div className="column">
                     <p>
                       <strong>Version Count: </strong>
@@ -128,28 +136,16 @@ export default function ContentViewList() {
                   &nbsp;
                   <div className="column">
                     <p>
-                      <strong>Environments: </strong>
+                      <strong>Composite View: </strong>
                       <br></br>
-                      {cv.environments.map((cv_env) => (
-                        <p>{`${cv_env.name}`}</p>
-                      ))}
-                    </p>
-                  </div>
-                  &nbsp;
-                  <div className="column">
-                    <p>
-                      <strong>Organization: </strong>
-                      <br></br>
-                      {`${cv.organization.name}`}
+                      {`${cv.composite}`}
                     </p>
                   </div>
                 </div>
               </CardBody>
-
               <CardFooter className="card-footer">
                 <strong>Last Updated on: </strong>
                 {`${cv.updated_at}`}
-                {/*This prints out in UTC time, maybe dont include this or find a way to convert to local time and make pretty*/}
               </CardFooter>
             </Card>
           </Button>

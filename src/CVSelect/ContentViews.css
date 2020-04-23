@@ -1,14 +1,3 @@
-/*body {
-  background-position: 0px, 0px;
-  background-image: linear-gradient(
-    to bottom,
-    #ffffff 0px,
-    #ffffff 93px,
-    #025d8c 93px,
-    white 100%
-  );
-}*/
-
 .cv-select {
   text-align: center;
 }
@@ -45,12 +34,6 @@
   text-overflow: ellipsis;
 }
 
-.cv-select .card-body:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
 .cv-select .column {
   text-align: center;
   width: 20%;
@@ -84,10 +67,8 @@
   background-color: gainsboro;
 }
 
-.cv-select .card-button:hover {
-  background-color: rgba(165, 215, 231, 0.493);
-  background-color: lightslategray;
-  /*background-color: rgb(200, 200, 0);*/
+.cv-select #card-button:hover {
+  background-color: lightsteelblue;
 }
 
 .hidden-element {
