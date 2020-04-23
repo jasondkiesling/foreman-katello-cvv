@@ -2,7 +2,7 @@ import React from "react";
 import { AuthContext } from "../utils/AuthProvider";
 
 import "@patternfly/react-core/dist/styles/base.css";
-import CVVButton from "./CVVButton"
+import CVVButton from "./CVVButton";
 import "./CVV.css";
 
 export default function CVVDisplay({ match }) {
@@ -15,7 +15,7 @@ export default function CVVDisplay({ match }) {
       return;
     }
     fetch(
-      `https://${basicAuth.host}/katello/api/content_views/${match.params.id}/content_view_versions/`,
+      `https://${basicAuth.host}/katello/api/content_views/${match.params.id}/content_view_versions?full_result=true`,
       {
         method: "GET",
         headers: {
