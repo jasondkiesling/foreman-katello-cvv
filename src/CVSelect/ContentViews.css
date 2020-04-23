@@ -2,10 +2,51 @@
   text-align: center;
 }
 
-.cv-select .card-button {
-  background-color: white;
-  width: 50%;
+.cv-select #card-button {
+  background-color: #025d8c;
+  width: 60%;
+  word-wrap: break-word;
   margin: 20px;
+  border-radius: 10px;
+}
+
+.cv-select .card-header {
+  color: white;
+  width: auto;
+  word-wrap: break-word;
+}
+
+.cv-select .card-body {
+  color: white;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.cv-select .description {
+  margin-left: 5%;
+  text-align: left;
+  max-width: 90%;
+  line-height: 1em;
+  max-height: 2em;
+  overflow: hidden;
+  white-space: pre;
+  text-overflow: ellipsis;
+}
+
+.cv-select .column {
+  text-align: center;
+  width: 20%;
+  max-height: 4em;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+}
+
+.cv-select .card-footer {
+  color: white;
+  width: auto;
+  word-wrap: break-word;
+  padding-bottom: 10px;
 }
 
 .cv-select .searchbar {
@@ -23,11 +64,11 @@
   width: auto;
   margin-right: 25%;
   margin-left: 25%;
-  background-color: gainsboro
+  background-color: gainsboro;
 }
 
-.cv-select .card-button:hover {
-  background-color: rgba(165, 215, 231, 0.493);
+.cv-select #card-button:hover {
+  background-color: lightsteelblue;
 }
 
 .hidden-element {
