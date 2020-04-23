@@ -6,25 +6,31 @@ import { Modal } from "@patternfly/react-core";
 export default function CVVModal({ title, open, onClose, cvvID }) {
   const { basicAuth } = React.useContext(AuthContext);
   const [cvvInfo, setCVVInfo] = React.useState([]);
+  React.useEffect(() => {
+    if (!basicAuth.basicAuth || !basicAuth.host) {
+      return;
+    }
 
-  if (!basicAuth.basicAuth || !basicAuth.host) { return; }
-
-  fetch(`https://${basicAuth.host}/katello/api/content_view_versions/${cvvID}`, {
-    method: "GET",
-    headers: {
-      Authorization: `Basic ${basicAuth.basicAuth}`,
-    },
-  })
-    .then((response) => response.json())
-    .then((arrayResponse) => {
-      setCVVInfo(arrayResponse);
-    });
+    fetch(
+      `https://${basicAuth.host}/katello/api/content_view_versions/${cvvID}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Basic ${basicAuth.basicAuth}`,
+        },
+      },
+    )
+      .then((response) => response.json())
+      .then((arrayResponse) => {
+        setCVVInfo(arrayResponse);
+      });
+  }, [cvvID, basicAuth]);
 
   return (
     <Modal title={title} isOpen={open} onClose={onClose}>
-      {`Version: ${cvvInfo.version}`} 
+      {`Version: ${cvvInfo.version}`}
       <br />
-      {(cvvInfo.description) ? `${cvvInfo.description}` : null}
+      {cvvInfo.description ? `${cvvInfo.description}` : null}
       <br />
       {`Packages:\t${cvvInfo.package_count}`}
       <br />
