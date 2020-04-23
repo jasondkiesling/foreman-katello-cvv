@@ -1,10 +1,11 @@
 import React from "react";
 
-import { TextInput, Label, Checkbox, Button } from "@patternfly/react-core";
+import { TextInput, Label, Button } from "@patternfly/react-core";
 import qs from "querystring";
 
 import LoginError from "./LoginError";
 import { AuthContext } from "../utils/AuthProvider";
+import useKeyPress from "../utils/useKeyPress";
 
 import "./Login.css";
 
@@ -22,20 +23,34 @@ class LoginRejected extends Error {
   }
 }
 
+class InvalidForemanServer extends Error {
+  constructor(...params) {
+    super(...params);
+    this.name = "Server does not appear to be a Foreman server";
+  }
+}
+
 export default function LoginForm() {
   const [state, setState] = React.useState({
     serverName: "",
-    isRememberMeChecked: false,
     usernameValue: "",
     passwordValue: "",
     errorMessage: "",
+    isLoading: false,
   });
+  const enterPressed = useKeyPress("Enter");
+
+  React.useEffect(() => {
+    const queryStrings = qs.parse(window.location.search.slice(1));
+    if (queryStrings.error === "401") {
+      setState({
+        ...state,
+        errorMessage: "Your server rejected our request. Please login again.",
+      });
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const { setBasicAuth } = React.useContext(AuthContext);
-
-  const onRememberMeClick = () => {
-    setState({ ...state, isRememberMeChecked: !state.isRememberMeChecked });
-  };
 
   const handleUsernameChange = (val) => {
     setState({ ...state, usernameValue: val });
@@ -68,7 +83,9 @@ export default function LoginForm() {
         return;
       }
     }
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     setState({ ...state, errorMessage: "" });
     fetch(`https://${state.serverName}/api/users/${state.usernameValue}`, {
       method: "GET",
@@ -82,11 +99,16 @@ export default function LoginForm() {
         if (!response.ok) {
           throw new LoginRejected();
         }
+        return response.json();
+      })
+      .then((response) => {
+        if (response.login !== state.usernameValue) {
+          throw new InvalidForemanServer();
+        }
         setBasicAuth(
           window.btoa(`${state.usernameValue}:${state.passwordValue}`),
           state.serverName,
           state.usernameValue,
-          state.isRememberMeChecked ? 30 : 0,
         );
         const queryStrings = qs.parse(window.location.search.slice(1));
         if (queryStrings.redirect) {
@@ -99,12 +121,26 @@ export default function LoginForm() {
       .catch((err) => {
         if (err instanceof LoginRejected) {
           setState({ ...state, errorMessage: "Invalid Login Credentials" });
+        } else if (
+          err instanceof InvalidForemanServer ||
+          err instanceof SyntaxError
+        ) {
+          setState({
+            ...state,
+            errorMessage: "Server does not appear to be a Foreman server",
+          });
         } else {
           setState({ ...state, errorMessage: "Unable to Access Host" });
         }
         console.error(err);
       });
   };
+
+  React.useEffect(() => {
+    if (enterPressed) {
+      onSubmitClick();
+    }
+  }, [enterPressed, onSubmitClick]);
 
   return (
     <form className="login-form">
@@ -136,14 +172,6 @@ export default function LoginForm() {
         value={state.passwordValue}
         onChange={handlePasswordChange}
       />
-      <div className="remember_box">
-        <Label>Remember Me?</Label>
-        <Checkbox
-          id="remember_me"
-          value={state.isRememberMeChecked}
-          onClick={onRememberMeClick}
-        />
-      </div>
       <Button id="submit" onClick={onSubmitClick}>
         Submit!
       </Button>

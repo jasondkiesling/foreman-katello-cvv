@@ -58,15 +58,20 @@ export default function ContentViewList() {
   React.useEffect(() => {
     if (!debouncedSearchTerm) {
       contentViews.forEach((cv) => {
-        document.getElementById(cv.name.toLowerCase()).classList.remove("hidden-element");
+        document
+          .getElementById(cv.name.toLowerCase())
+          .classList.remove("hidden-element");
       });
       return;
     }
 
     contentViews.forEach((cv) => {
       const str = cv.name.toLowerCase();
-      if(!str.includes(debouncedSearchTerm)) { document.getElementById(str).classList.add("hidden-element"); }
-      else { document.getElementById(str).classList.remove("hidden-element"); }
+      if (!str.includes(debouncedSearchTerm)) {
+        document.getElementById(str).classList.add("hidden-element");
+      } else {
+        document.getElementById(str).classList.remove("hidden-element");
+      }
     });
   }, [contentViews, debouncedSearchTerm]);
 
@@ -83,25 +88,69 @@ export default function ContentViewList() {
         placeholder="Search Content Views..."
         onChange={handleOnSearchChange}
       />
-      <Card id="card-container">
-        {contentViews.map((cv) => (
-          <div key={cv.id}>
-            <Button className="card-button" onClick={() => handleOnClick(cv.id)} id={cv.name.toLowerCase()}>
-              <Card isCompact isHoverable>
-                <CardHeader>{cv.name}</CardHeader>
-                <CardBody>
-                  <strong>Description:</strong>
-                  {` ${(cv.description) ? cv.description : `No description`}`}
-                </CardBody>
-                <CardFooter>
-                  <strong>Version:</strong>
-                  {` ${cv.latest_version}`}
-                </CardFooter>
-              </Card>
-            </Button>
-          </div>
-        ))}
-      </Card>
+
+      {contentViews.map((cv) => (
+        <div key={cv.id}>
+          <Button id="card-button" onClick={() => handleOnClick(cv.id)}>
+            <Card isCompact isHoverable id={cv.name.toLowerCase()}>
+              <CardHeader className="card-header">
+                <strong>{cv.name}</strong>
+                <br></br>
+                <div className="description">{cv.description}</div>
+              </CardHeader>
+              <CardBody>
+                <div className="card-body">
+                  <div className="column">
+                    <p>
+                      <strong>Organization: </strong>
+                      <br></br>
+                      {`${cv.organization.name}`}
+                    </p>
+                  </div>
+                  &nbsp;
+                  <div className="column">
+                    <p>
+                      <strong>Version Count: </strong>
+                      <br></br>
+                      {`${cv.version_count}`}
+                    </p>
+                  </div>
+                  &nbsp;
+                  <div className="column">
+                    <p>
+                      <strong>Current Version: </strong>
+                      <br></br>
+                      {` ${cv.latest_version}`}
+                    </p>
+                  </div>
+                  &nbsp;
+                  <div className="column">
+                    <p>
+                      <strong>Repositories: </strong>
+                      <br></br>
+                      {cv.repositories.map((cv_repo) => (
+                        <p>{`${cv_repo.name}`}</p>
+                      ))}
+                    </p>
+                  </div>
+                  &nbsp;
+                  <div className="column">
+                    <p>
+                      <strong>Composite View: </strong>
+                      <br></br>
+                      {`${cv.composite}`}
+                    </p>
+                  </div>
+                </div>
+              </CardBody>
+              <CardFooter className="card-footer">
+                <strong>Last Updated on: </strong>
+                {`${cv.updated_at}`}
+              </CardFooter>
+            </Card>
+          </Button>
+        </div>
+      ))}
     </div>
   );
 }

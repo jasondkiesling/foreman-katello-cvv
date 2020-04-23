@@ -1,18 +1,41 @@
 #environments article {
   width: 170px;
   height: 150px;
+  overflow: hidden;
+  padding: 0.5em;
   text-align: center;
   background-color: white;
   margin: 5px;
 }
 
-.env_titles {
+.env-titles {
   font-weight: bold;
   font-size: large;
+  padding-top: 0.5em;
 }
 
-.pf-l-stack__item {
+.cvv-button-row-wrap {
   display: flex;
-  padding: 5px;
   flex-direction: row;
+  flex-wrap: wrap;
+  padding-bottom: 1em;
+}
+
+.env-name {
+  font-size: large;
+  overflow: hidden;
+  font-style: italic;
+  text-align: center;
+}
+
+.version {
+  overflow: hidden;
+  text-align: center;
+}
+
+.cvv-descrip {
+  font-size: small;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
 }
