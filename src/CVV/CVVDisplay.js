@@ -2,7 +2,7 @@ import React from "react";
 import { AuthContext } from "../utils/AuthProvider";
 
 import "@patternfly/react-core/dist/styles/base.css";
-import CVVButton from "./CVVButton"
+import CVVButton from "./CVVButton";
 import "./CVV.css";
 
 export default function CVVDisplay({ match }) {
