@@ -22,11 +22,20 @@
 }
 
 .env-name {
-  font-size: x-large;
+  font-size: large;
+  overflow: hidden;
+  font-style: italic;
+  text-align: center;
+}
+
+.version {
+  overflow: hidden;
+  text-align: center;
 }
 
 .cvv-descrip {
   font-size: small;
   overflow: hidden;
   text-align: center;
+  text-overflow: ellipsis;
 }
