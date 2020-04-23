@@ -9,7 +9,7 @@ import {
   CardBody,
 } from "@patternfly/react-core";
 
-export default function CVVButton({ cvv }) {
+export default function CVVButton({ cvv }) { 
   const [open, setOpen] = React.useState(false);
 
   const handleOnClick = () => {
@@ -36,6 +36,7 @@ export default function CVVButton({ cvv }) {
       <CVVModal
         title={cvv.name}
         id={`modal-${cvv.id}`}
+        cvvID={cvv.id}
         open={open}
         onClose={handleOnClick}
       />
