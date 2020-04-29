@@ -18,8 +18,8 @@ export default function CVVButton({ cvv }) {
 
   return (
     <div>
-      <Button onClick={handleOnClick}>
-        <Card isHoverable>
+      <Button className="cvv-button" onClick={handleOnClick}>
+        <Card className="cvv-button-card" isHoverable>
           <CardHeader>
             <strong className="env-name">{cvv.name}</strong>
             <div>

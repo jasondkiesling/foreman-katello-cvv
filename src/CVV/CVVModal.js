@@ -21,8 +21,8 @@ export default function CVVModal({ title, open, onClose, cvvID }) {
         },
       )
         .then((response) => response.json())
-        .then((arrayResponse) => {
-          setCVVInfo(arrayResponse);
+        .then((jsonResponse) => {
+          setCVVInfo(jsonResponse);
         });
     }
   }, [cvvID, basicAuth, open]);

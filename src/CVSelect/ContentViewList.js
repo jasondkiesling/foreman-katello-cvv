@@ -39,41 +39,26 @@ export default function ContentViewList() {
     if (!basicAuth.basicAuth || !basicAuth.host) {
       return;
     }
-    fetch(`https://${basicAuth.host}/katello/api/content_views/`, {
-      method: "GET",
-      headers: {
-        Authorization: `Basic ${basicAuth.basicAuth}`,
+    fetch(
+      `https://${basicAuth.host}/katello/api/content_views?full_result=true${
+        debouncedSearchTerm ? `&search=${debouncedSearchTerm}` : ""
+      }`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Basic ${basicAuth.basicAuth}`,
+        },
       },
-    })
+    )
       .then((response) => response.json())
       .then((arrayResponse) => {
         setContentViews(arrayResponse.results);
       });
-  }, [basicAuth]);
+  }, [basicAuth, debouncedSearchTerm]);
 
   const handleOnClick = (id) => {
     window.location.assign(`/content-view/${id}`);
   };
-
-  React.useEffect(() => {
-    if (!debouncedSearchTerm) {
-      contentViews.forEach((cv) => {
-        document
-          .getElementById(cv.name.toLowerCase())
-          .classList.remove("hidden-element");
-      });
-      return;
-    }
-
-    contentViews.forEach((cv) => {
-      const str = cv.name.toLowerCase();
-      if (!str.includes(debouncedSearchTerm)) {
-        document.getElementById(str).classList.add("hidden-element");
-      } else {
-        document.getElementById(str).classList.remove("hidden-element");
-      }
-    });
-  }, [contentViews, debouncedSearchTerm]);
 
   const handleOnSearchChange = (val) => {
     setSearchTerm(val);
@@ -91,12 +76,11 @@ export default function ContentViewList() {
 
       {contentViews.map((cv) => (
         <div key={cv.id}>
-          <Button id="card-button" onClick={() => handleOnClick(cv.id)}>
+          <Button className="card-button" onClick={() => handleOnClick(cv.id)}>
             <Card isCompact isHoverable id={cv.name.toLowerCase()}>
               <CardHeader className="card-header">
                 <strong>{cv.name}</strong>
-                <br></br>
-                <div className="description">{cv.description}</div>
+                <div className="cv-description">{cv.description}</div>
               </CardHeader>
               <CardBody>
                 <div className="card-body">
@@ -128,9 +112,7 @@ export default function ContentViewList() {
                     <p>
                       <strong>Repositories: </strong>
                       <br></br>
-                      {cv.repositories.map((cv_repo) => (
-                        <p>{`${cv_repo.name}`}</p>
-                      ))}
+                      <p>{cv.repositories.length}</p>
                     </p>
                   </div>
                   &nbsp;

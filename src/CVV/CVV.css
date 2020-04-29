@@ -1,4 +1,9 @@
-#environments article {
+#cvv-info {
+  --border-gray: rgb(150, 150, 150);
+  padding: 1em;
+}
+
+#cvv-info article {
   width: 170px;
   height: 150px;
   overflow: hidden;
@@ -8,43 +13,77 @@
   margin: 5px;
 }
 
-.env-titles {
+#cvv-info .env-title {
   font-weight: bold;
-  font-size: large;
+  font-size: 125%;
+  padding-top: 0.5em;
+  padding-left: 0.25em;
+}
+
+#cvv-info .path-title {
+  font-weight: bold;
+  font-size: 150%;
   padding-top: 0.5em;
 }
 
-.cvv-button-row-wrap {
+#cvv-info .cvv-button-row-wrap {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   padding-bottom: 1em;
 }
 
-.env-name {
+#cvv-info .env-name {
   font-size: large;
   overflow: hidden;
   font-style: italic;
   text-align: center;
 }
 
-.version {
+#cvv-info .version {
   overflow: hidden;
   text-align: center;
 }
 
-.cvv-descrip {
+#cvv-info .cvv-descrip {
   font-size: small;
   overflow: hidden;
   text-align: center;
   text-overflow: ellipsis;
 }
 
-.cvv-modal {
-  width: 35%;
-  padding: 5px;
+#cvv-info .pf-c-button.pf-m-primary {
+  background-color: white;
 }
 
-.pf-c-button.pf-m-primary {
-  background-color: white;
+#cvv-info .path-env-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#cvv-info .path-env {
+  margin: 0.5em;
+  min-width: 10%;
+  min-height: 25vh;
+  border: 1px solid var(--border-gray);
+  padding-left: 0.1em;
+  padding-right: 0.1em;
+  padding-bottom: 0.25em;
+  border-radius: 0.5em;
+}
+
+#cvv-info .lifecycle-path {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 1.5px solid var(--border-gray);
+}
+
+#cvv-info #NLE {
+  border-top: 1.5px solid var(--border-gray);
+}
+
+#cvv-info h1 {
+  font-weight: bold;
+  font-size: 200%;
 }

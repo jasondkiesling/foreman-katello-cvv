@@ -1,13 +1,5 @@
 import React from "react";
 
-// import {
-//   LoginPage,
-//   TextInput,
-//   Label,
-//   Checkbox,
-//   Button
-// } from "@patternfly/react-core";
-
 import "./Login.css";
 
 export default function LoginHeader() {
