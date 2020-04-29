@@ -1,8 +1,8 @@
-.cv-select {
+div.cv-select {
   text-align: center;
 }
 
-.cv-select #card-button {
+div.cv-select button.card-button {
   background-color: #025d8c;
   width: 60%;
   word-wrap: break-word;
@@ -10,20 +10,20 @@
   border-radius: 10px;
 }
 
-.cv-select .card-header {
+div.cv-select .card-header {
   color: white;
   width: auto;
   word-wrap: break-word;
 }
 
-.cv-select .card-body {
+div.cv-select .card-body {
   color: white;
   width: auto;
   display: flex;
   flex-direction: row;
 }
 
-.cv-select .description {
+div.cv-select .cv-description {
   margin-left: 5%;
   text-align: left;
   max-width: 90%;
@@ -32,42 +32,36 @@
   overflow: hidden;
   white-space: pre;
   text-overflow: ellipsis;
+  font-weight: normal;
+  font-size: 85%;
 }
 
-.cv-select .column {
+div.cv-select .column {
   text-align: center;
   width: 20%;
   max-height: 4em;
   overflow-y: hidden;
+  overflow-x: hidden;
   text-overflow: ellipsis;
 }
 
-.cv-select .card-footer {
+div.cv-select .card-footer {
   color: white;
   width: auto;
   word-wrap: break-word;
   padding-bottom: 10px;
 }
 
-.cv-select .searchbar {
+div.cv-select .searchbar {
   margin: 20px;
   width: 50%;
   background-color: white;
-
   border-width: 1px;
   border-color: black;
-
   padding: 10px;
 }
 
-.cv-select #card-container {
-  width: auto;
-  margin-right: 25%;
-  margin-left: 25%;
-  background-color: gainsboro;
-}
-
-.cv-select #card-button:hover {
+div.cv-select .card-button:hover {
   background-color: lightsteelblue;
 }
 
