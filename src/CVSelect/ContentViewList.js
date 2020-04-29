@@ -40,7 +40,9 @@ export default function ContentViewList() {
       return;
     }
     fetch(
-      `https://${basicAuth.host}/katello/api/content_views?full_result=true`,
+      `https://${basicAuth.host}/katello/api/content_views?full_result=true${
+        debouncedSearchTerm ? `&search=${debouncedSearchTerm}` : ""
+      }`,
       {
         method: "GET",
         headers: {
@@ -52,31 +54,11 @@ export default function ContentViewList() {
       .then((arrayResponse) => {
         setContentViews(arrayResponse.results);
       });
-  }, [basicAuth]);
+  }, [basicAuth, debouncedSearchTerm]);
 
   const handleOnClick = (id) => {
     window.location.assign(`/content-view/${id}`);
   };
-
-  React.useEffect(() => {
-    if (!debouncedSearchTerm) {
-      contentViews.forEach((cv) => {
-        document
-          .getElementById(cv.name.toLowerCase())
-          .classList.remove("hidden-element");
-      });
-      return;
-    }
-
-    contentViews.forEach((cv) => {
-      const str = cv.name.toLowerCase();
-      if (!str.includes(debouncedSearchTerm)) {
-        document.getElementById(str).classList.add("hidden-element");
-      } else {
-        document.getElementById(str).classList.remove("hidden-element");
-      }
-    });
-  }, [contentViews, debouncedSearchTerm]);
 
   const handleOnSearchChange = (val) => {
     setSearchTerm(val);
