@@ -8,7 +8,7 @@ import "./CVV.css";
 export default function CVVDisplay({ match }) {
   const { basicAuth } = React.useContext(AuthContext);
   const [cvvs, setCVVs] = React.useState([]);
-  const [cvvEnv, setCvvEnv] = React.useState([]);
+  const [cvvEnvPaths, setCvvEnvPaths] = React.useState([]);
 
   React.useEffect(() => {
     if (!basicAuth.basicAuth || !basicAuth.host) {
@@ -64,7 +64,7 @@ export default function CVVDisplay({ match }) {
       .then((jsonResults) => {
         console.log(jsonResults.organization_id);
         fetch(
-          `https://${basicAuth.host}/katello/api/organizations/${jsonResults.organization_id}/environments?full_result=true`,
+          `https://${basicAuth.host}/katello/api/organizations/${jsonResults.organization_id}/environments/paths`,
           {
             method: "GET",
             headers: {
@@ -75,16 +75,16 @@ export default function CVVDisplay({ match }) {
           .then((response) => response.json())
           .then((jsonResults) => {
             console.log(jsonResults);
-            setCvvEnv(jsonResults.results);
+            setCvvEnvPaths(jsonResults.results);
           });
       });
   }, [basicAuth, match.params.id]);
 
   return (
-    <div id="environments" className="pf-l-stack">
-      <div id="NLE" className="pf-l-stack__item">
-        <div className="env-titles">No Lifecycle Environment</div>
-        <div className="pf-l-stack__item cvv-button-row-wrap">
+    <div id="cvv-info">
+      <div id="NLE">
+        <div className="path-title">No Lifecycle Environment</div>
+        <div className=" cvv-button-row-wrap">
           {cvvs["none"]
             ? cvvs["none"].map((cvv) => {
                 return <CVVButton key={cvv.id} cvv={cvv} />;
@@ -92,15 +92,24 @@ export default function CVVDisplay({ match }) {
             : null}
         </div>
       </div>
-      {cvvEnv
-        ? cvvEnv.map((env) => {
+      {cvvEnvPaths
+        ? cvvEnvPaths.map((path, i) => {
             return (
-              <div className="pf-l-stack__item " key={env.id}>
-                <div className="env-titles">{env.name}</div>
-                <div className="cvv-button-row">
-                  {cvvs[env.id]
-                    ? cvvs[env.id].map((cvv) => {
-                        return <CVVButton key={cvv.id} cvv={cvv} />;
+              <div className="lifecycle-path" key={`path-${i + 1}`}>
+                <div className="path-title">{`Lifecycle Path #${i + 1}`}</div>
+                <div className="path-env-list">
+                  {path.environments.length
+                    ? path.environments.map((env) => {
+                        return (
+                          <div className="path-env" key={env.id}>
+                            <div className="env-title">{env.name}</div>
+                            {cvvs[env.id]
+                              ? cvvs[env.id].map((cvv) => {
+                                  return <CVVButton key={cvv.id} cvv={cvv} />;
+                                })
+                              : null}
+                          </div>
+                        );
                       })
                     : null}
                 </div>

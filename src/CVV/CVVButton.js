@@ -9,7 +9,7 @@ import {
   CardBody,
 } from "@patternfly/react-core";
 
-export default function CVVButton({ cvv }) { 
+export default function CVVButton({ cvv }) {
   const [open, setOpen] = React.useState(false);
 
   const handleOnClick = () => {
@@ -18,8 +18,8 @@ export default function CVVButton({ cvv }) {
 
   return (
     <div>
-      <Button onClick={handleOnClick}>
-        <Card isHoverable>
+      <Button className="cvv-button" onClick={handleOnClick}>
+        <Card className="cvv-button-card" isHoverable>
           <CardHeader>
             <strong className="env-name">{cvv.name}</strong>
             <div>
