@@ -62,7 +62,6 @@ export default function CVVDisplay({ match }) {
     )
       .then((response) => response.json())
       .then((jsonResults) => {
-        console.log(jsonResults.organization_id);
         fetch(
           `https://${basicAuth.host}/katello/api/organizations/${jsonResults.organization_id}/environments/paths`,
           {
@@ -74,7 +73,6 @@ export default function CVVDisplay({ match }) {
         )
           .then((response) => response.json())
           .then((jsonResults) => {
-            console.log(jsonResults);
             setCvvEnvPaths(jsonResults.results);
           });
       });
