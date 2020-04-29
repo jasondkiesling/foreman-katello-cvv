@@ -9,6 +9,14 @@ export default function CVVDisplay({ match }) {
   const { basicAuth } = React.useContext(AuthContext);
   const [cvvs, setCVVs] = React.useState([]);
   const [cvvEnvPaths, setCvvEnvPaths] = React.useState([]);
+  const [viewInfo, setViewInfo] = React.useState({
+    name: "Loading...",
+    description: "",
+    created_at: "",
+    last_published: "",
+    organization: { name: "" },
+    version_count: 0,
+  });
 
   React.useEffect(() => {
     if (!basicAuth.basicAuth || !basicAuth.host) {
@@ -62,6 +70,8 @@ export default function CVVDisplay({ match }) {
     )
       .then((response) => response.json())
       .then((jsonResults) => {
+        console.log(jsonResults);
+        setViewInfo(jsonResults);
         fetch(
           `https://${basicAuth.host}/katello/api/organizations/${jsonResults.organization_id}/environments/paths`,
           {
@@ -80,6 +90,22 @@ export default function CVVDisplay({ match }) {
 
   return (
     <div id="cvv-info">
+      <div id="content-view-info">
+        <h1>{viewInfo.name}</h1>
+        <p>{viewInfo.description}</p>
+        <p>
+          <strong>Organization:</strong> {viewInfo.organization.name}
+        </p>
+        <p>
+          <strong>Created at:</strong> {viewInfo.created_at}
+        </p>
+        <p>
+          <strong>Last Published:</strong> {viewInfo.last_published}
+        </p>
+        <p>
+          <strong>Total Versions:</strong> {viewInfo.version_count}
+        </p>
+      </div>
       <div id="NLE">
         <div className="path-title">No Lifecycle Environment</div>
         <div className=" cvv-button-row-wrap">
