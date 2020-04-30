@@ -88,6 +88,16 @@
   font-size: 200%;
 }
 
+.cvv-modal {
+  width: 45%;
+  background-color: white;
+  padding: 5px;
+}
+
+.cvv-modal .env-select {
+  width: 250px;
+}
+
 #cvv-info .cvv-button-container {
   display: flex;
   justify-content: center;

@@ -70,7 +70,6 @@ export default function CVVDisplay({ match }) {
     )
       .then((response) => response.json())
       .then((jsonResults) => {
-        console.log(jsonResults);
         setViewInfo(jsonResults);
         fetch(
           `https://${basicAuth.host}/katello/api/organizations/${jsonResults.organization_id}/environments/paths`,
@@ -111,7 +110,7 @@ export default function CVVDisplay({ match }) {
         <div className=" cvv-button-row-wrap">
           {cvvs["none"]
             ? cvvs["none"].map((cvv) => {
-                return <CVVButton key={cvv.id} cvv={cvv} />;
+                return <CVVButton key={cvv.id} cvv={cvv} orgID={viewInfo.organization_id} />;
               })
             : null}
         </div>
@@ -129,7 +128,7 @@ export default function CVVDisplay({ match }) {
                             <div className="env-title">{env.name}</div>
                             {cvvs[env.id]
                               ? cvvs[env.id].map((cvv) => {
-                                  return <CVVButton key={cvv.id} cvv={cvv} />;
+                                  return <CVVButton key={cvv.id} cvv={cvv} orgID={viewInfo.organization_id}/>;
                                 })
                               : null}
                           </div>
