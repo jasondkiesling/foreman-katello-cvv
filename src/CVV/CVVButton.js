@@ -17,7 +17,7 @@ export default function CVVButton({ cvv }) {
   };
 
   return (
-    <div>
+    <div className="cvv-button-container">
       <Button className="cvv-button" onClick={handleOnClick}>
         <Card className="cvv-button-card" isHoverable>
           <CardHeader>
