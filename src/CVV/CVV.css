@@ -87,3 +87,13 @@
   font-weight: bold;
   font-size: 200%;
 }
+
+.cvv-modal {
+  width: 45%;
+  background-color: white;
+  padding: 5px;
+}
+
+.cvv-modal .env-select {
+  width: 250px;
+}
