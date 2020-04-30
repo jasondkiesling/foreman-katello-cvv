@@ -64,7 +64,7 @@
 
 #cvv-info .path-env {
   margin: 0.5em;
-  min-width: 10%;
+  width: 200px;
   min-height: 25vh;
   border: 1px solid var(--border-gray);
   padding-left: 0.1em;
@@ -86,4 +86,9 @@
 #cvv-info h1 {
   font-weight: bold;
   font-size: 200%;
+}
+
+#cvv-info .cvv-button-container {
+  display: flex;
+  justify-content: center;
 }
