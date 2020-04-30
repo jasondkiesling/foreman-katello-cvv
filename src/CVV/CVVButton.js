@@ -21,14 +21,14 @@ export default function CVVButton({ cvv, orgID }) {
       <Button className="cvv-button" onClick={handleOnClick}>
         <Card className="cvv-button-card" isHoverable>
           <CardHeader>
-            <strong className="env-name">{cvv.name}</strong>
             <div>
               <strong className="version">Version:&nbsp;</strong>
               {cvv.version}
             </div>
           </CardHeader>
           <CardBody>
-            <div className="cvv-descrip">{cvv.description}</div>
+            <div className="cvv-descrip">{cvv.description}<br />
+              Environments: {cvv.environments.length}</div>
           </CardBody>
           <CardFooter></CardFooter>
         </Card>

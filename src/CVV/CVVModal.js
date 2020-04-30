@@ -2,7 +2,6 @@ import React from "react";
 import { AuthContext } from "../utils/AuthProvider";
 
 import {
-  Button,
   Modal,
 } from "@patternfly/react-core";
 import PromotionDropdown from "./PromotionDropdown";
@@ -47,17 +46,17 @@ export default function CVVModal({ title, open, onClose, cvvID, orgID }) {
     }
   }, [cvvID, basicAuth, open, orgID]);
 
-  const handleRemoveClick = () => {
-    fetch(
-      `https://${basicAuth.host}/katello/api/content_view_versions/${cvvID}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Basic ${basicAuth.basicAuth}`,
-        },
-      },
-    );
-  };
+  // const handleRemoveClick = () => {
+  //   fetch(
+  //     `https://${basicAuth.host}/katello/api/content_view_versions/${cvvID}`,
+  //     {
+  //       method: "DELETE",
+  //       headers: {
+  //         Authorization: `Basic ${basicAuth.basicAuth}`,
+  //       },
+  //     },
+  //   );
+  // };
 
   return (
     <Modal
