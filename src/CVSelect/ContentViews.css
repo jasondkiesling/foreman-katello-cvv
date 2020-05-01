@@ -68,3 +68,8 @@ div.cv-select .card-button:hover {
 .hidden-element {
   display: none !important;
 }
+
+div.cv-select article.pf-c-card {
+  --pf-c-card--BoxShadow: unset;
+  --pf-c-card--BackgroundColor: unset;
+}
