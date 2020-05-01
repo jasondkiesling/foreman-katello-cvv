@@ -1,7 +1,7 @@
 import React from "react";
 import { AuthContext } from "../utils/AuthProvider";
 
-import { Select, SelectOption, Label } from "@patternfly/react-core";
+import { Select, SelectOption } from "@patternfly/react-core";
 
 export default function PromotionDropdown({ cvvID, envs }) {
   const { basicAuth } = React.useContext(AuthContext);
