@@ -102,3 +102,7 @@
   display: flex;
   justify-content: center;
 }
+
+#cvv-info .cvv-button {
+  --pf-c-button--PaddingTop: unset;
+}

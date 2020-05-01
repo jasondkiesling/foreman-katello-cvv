@@ -51,6 +51,8 @@ header#login-header > img.text {
 }
 
 form.login-form > span.pf-c-label {
+  --pf-c-label--BackgroundColor: unset;
+  --pf-c-label--Color: unset;
   text-align: left;
   padding-left: calc((100% - var(--input-width)) / 2);
   padding-right: calc((100% - var(--input-width)) / 2);
